@@ -1,0 +1,1 @@
+export {authUser} from "./middlewares/auth-user"
