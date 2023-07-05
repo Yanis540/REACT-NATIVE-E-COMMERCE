@@ -26,11 +26,18 @@ model Product {
   name           String
   rating         Float            @default(1)
   price          Float
+  image          String
   quantity       Int              @default(0)
   size_variants  SizeVariant[]
+  categories     Category[]
   colors         ColorVariant[]
   orders_product OrderedProduct[]
   liked_by       User[]
+}
+
+model Category {
+  name     String    @id
+  products Product[]
 }
 
 enum SizeVariant {

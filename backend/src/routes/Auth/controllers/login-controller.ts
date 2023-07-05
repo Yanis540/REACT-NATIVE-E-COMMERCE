@@ -30,11 +30,15 @@ const login_controller = asyncHandler(async(req:Request,res:Response)=>{
                 orders:true
             }
         }); 
-        if(!existingUser) 
+        if(!existingUser) {
+            res.status(404)
             throw new Error(`No user with email ${email}`);
+        }
         const passwordMatch = await bcrypt.compare(password,existingUser.hashedPassword);
-        if(!passwordMatch)
+        if(!passwordMatch){
+            res.status(401)
             throw new Error("Invalid password")
+        }
         // create and send tokens 
         const {accessToken,refreshToken,expiresIn} = generateAuthToken(existingUser.id);
         res.status(201).json({
@@ -56,8 +60,10 @@ const login_controller = asyncHandler(async(req:Request,res:Response)=>{
         if(err instanceof ZodError){
             throw new Error("Invalid Input")
         }
-        if(!(err instanceof PrismaClientKnownRequestError) && !(err instanceof PrismaClientUnknownRequestError)  )
+        if(!(err instanceof PrismaClientKnownRequestError) && !(err instanceof PrismaClientUnknownRequestError)  ){
+            res.status(500)
             throw new Error("Error with databaase ")
+        }
         throw new Error("Internal server error")
 
     }

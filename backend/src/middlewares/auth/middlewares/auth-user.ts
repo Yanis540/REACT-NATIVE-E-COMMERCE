@@ -11,15 +11,26 @@ import { DefaultRequest, JwtPayload } from "../../../types";
 const authUser = asyncHandler(async(req:DefaultRequest, res:Response , next:NextFunction)=>{
     try{
         if(!req?.headers || !req?.headers?.authorization?.startsWith("Bearer") )
-            throw new Error("Unauthorized",{cause:AuthError.UNAUTHORIZED_ACCESS_TOKEN})
+            throw new Error("Unauthorized",{cause:AuthError.UNAUTHORIZED_ACCESS_TOKEN,})
         const token = req.headers.authorization.split(" ")[1];
-        const decoded :string |JwtPayload=<JwtPayload>jwt.verify(token,process.env.ACCESS_TOKEN_SECRET!);
-        if(!decoded?.id) 
-            throw new Error("Unauthorized",{cause:AuthError.UNAUTHORIZED_ACCESS_TOKEN});
+        let  decoded:string |JwtPayload;
+        try{
+            decoded =<JwtPayload>jwt.verify(token,process.env.ACCESS_TOKEN_SECRET!);
+        }
+        catch(err:any){
+            res.status(403)
+            throw new Error("Invalid Token",{cause:AuthError.EXPIRED_ACCESS_TOKEN});
+        }
+        if(!decoded?.id) {
+            res.status(401);
+            throw new Error("Unauthorized",{cause:AuthError.UNAUTHORIZED_ACCESS_TOKEN,});
+        }
         
         const user = await db.user.findFirst({where:{id:decoded.id}});
-        if(!user)
-            throw new Error("Unauthorized",{cause:AuthError.EXPIRED_ACCESS_TOKEN});
+        if(!user){
+            res.status(403)
+            throw new Error("Unauthorized",{cause:AuthError.EXPIRED_ACCESS_TOKEN,});
+        }
         req.user= user ; 
         next();
     }

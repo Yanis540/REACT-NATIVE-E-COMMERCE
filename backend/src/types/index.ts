@@ -1,13 +1,16 @@
 import  { JwtPayload as JWTPayloadType }  from "jsonwebtoken";
 import {Request} from "express"
-import { User } from "@prisma/client";
+import { Product, User , Category } from "@prisma/client";
 
 export type ErrorInstance = {
     cause ?:string 
-}&TypeError
+}&TypeError 
 export type DefaultRequest = {
     user ? : User
 }&Request
 export type JwtPayload ={
     id:string
 }&JWTPayloadType
+export type FullProduct = Product &{
+    categories : Category[]
+}
