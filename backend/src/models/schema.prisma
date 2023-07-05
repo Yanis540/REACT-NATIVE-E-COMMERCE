@@ -33,6 +33,7 @@ model Product {
   colors         ColorVariant[]
   orders_product OrderedProduct[]
   liked_by       User[]
+  orders         Order[]
 }
 
 model Category {
@@ -55,19 +56,46 @@ enum ColorVariant {
 }
 
 model Order {
-  id             String           @id @default(uuid())
-  date           DateTime         @default(now())
-  id_user        String
-  user           User             @relation(fields: [id_user], references: [id], onDelete: Cascade)
-  total_price    Float            @default(0)
-  products_order OrderedProduct[]
+  id              String           @id @default(uuid())
+  date            DateTime         @default(now())
+  id_user         String
+  user            User             @relation(fields: [id_user], references: [id], onDelete: Cascade)
+  amount          Int              @default(0)
+  checkout_url    String
+  checkout_status CheckoutStatus
+  payment_status  PaymentStatus
+  type            String
+  status          OrderStatus
+  products        Product[]
+  basket          OrderedProduct[]
 }
 
 model OrderedProduct {
   id_product String
   id_order   String
-  product    Product @relation(fields: [id_product], references: [id], onDelete: Cascade)
-  order      Order   @relation(fields: [id_order], references: [id], onDelete: Cascade)
+  product    Product      @relation(fields: [id_product], references: [id], onDelete: Cascade)
+  order      Order        @relation(fields: [id_order], references: [id], onDelete: Cascade)
+  quantity   Int
+  size       SizeVariant?
+  color      ColorVariant
 
   @@id([id_order, id_product])
+}
+
+enum PaymentStatus {
+  paid
+  unpaid
+  no_payment_required
+}
+
+enum CheckoutStatus {
+  open
+  complete
+  expired
+}
+
+enum OrderStatus {
+  progress
+  cancelled
+  delivered
 }

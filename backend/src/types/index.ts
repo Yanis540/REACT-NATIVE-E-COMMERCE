@@ -1,7 +1,8 @@
 import  { JwtPayload as JWTPayloadType }  from "jsonwebtoken";
 import {Request} from "express"
 import { Product, User , Category } from "@prisma/client";
-
+import {z} from "zod"
+import { basketSchema, productBasketSchema } from "../schemas";
 export type ErrorInstance = {
     cause ?:string 
 }&TypeError 
@@ -14,3 +15,7 @@ export type JwtPayload ={
 export type FullProduct = Product &{
     categories : Category[]
 }
+
+
+export type ProductBasket = z.infer<typeof productBasketSchema>  
+export type Basket = z.infer<typeof basketSchema>

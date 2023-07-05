@@ -6,6 +6,8 @@ import express,{Request, Response} from "express";
 import { errorMiddleware } from "./src/middlewares/error";
 import authRouter from "./src/routes/Auth"
 import productsRouter from "./src/routes/Products"
+import orderRouter from "./src/routes/Order"
+import paymentRouter from "./src/routes/Payment"
 import { authUser } from "./src/middlewares/auth";
 
 
@@ -27,6 +29,8 @@ app.get('/',authUser,(req:Request, res:Response)=>{
 
 app.use("/auth",authRouter)
 app.use("/products",productsRouter)
+app.use("/orders",orderRouter)
+app.use("/payment",paymentRouter)
 
 
 app.use(errorMiddleware)
