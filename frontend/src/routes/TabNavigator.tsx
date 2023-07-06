@@ -9,13 +9,13 @@ interface NavigationProps {
 
 };
 
-export type NavigatorStackList ={
+export type NavigatorTabList ={
     Home : undefined 
     Shop : undefined 
     Account:undefined
 }
 
-const Tab = createBottomTabNavigator<NavigatorStackList>();
+const Tab = createBottomTabNavigator<NavigatorTabList>();
 
 function Navigation({}:NavigationProps) {
     const ScreenWidth = Dimensions.get('window').width;

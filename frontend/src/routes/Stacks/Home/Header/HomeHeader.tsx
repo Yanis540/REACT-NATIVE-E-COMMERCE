@@ -6,7 +6,7 @@ import { Ionicons , AntDesign } from '@expo/vector-icons';
 function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
     const ScreenWidth = Dimensions.get('window').width;
     return (
-        <View style={{width:ScreenWidth-20}} className="mt-[40px] flex-1 flex  flex-row items-center gap-[5px] w-screen h-full ">
+        <View style={{width:ScreenWidth-20}} className="mt-[40px]  flex-1 flex  flex-row items-center gap-[5px] w-screen h-full ">
             {
                 route.name == "HomeScreen" ? (
 
@@ -19,7 +19,7 @@ function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
             }
             {
                 route.name != "BasketScreen"&& (
-                    <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
+                    <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")} className="mr-[15px]">
                         <Ionicons name="basket-outline" size={24} color="rgba(45, 212, 191,1)" />
                     </TouchableOpacity>
                 )
