@@ -6,3 +6,32 @@ npm i  prisma  ts-node  @types/express @types/node
 npm install @prisma/client
 npx tsc --init
 npx prisma init
+
+
+
+: Front 
+
+npx create-expo-app frontend
+cd frontend
+npm install -D @tsconfig/react-native @types/jest @types/react @types/react-test-renderer typescript
+npx expo install @types/react@~18.0.27 typescript@^4.9.4
+: create in the root folder a tsconfig.json  and put : 
+: {
+:     "extends" : "@tsconfig/react-native/tsconfig.json"
+: }
+: start android studio in the same time run a phone 
+: and just press a on the terminal after running the npx expo start
+npx expo start
+
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/stack @react-navigation/drawer @react-navigation/bottom-tabs
+
+
+npx expo install react-native-gesture-handler react-native-reanimated
+
+npm i nativewind
+npx tailwindcss init 
+npm install --save-dev tsc-alias
+npm i @react-navigation/native-stack
+: folow this https://www.nativewind.dev/quick-starts/expo
