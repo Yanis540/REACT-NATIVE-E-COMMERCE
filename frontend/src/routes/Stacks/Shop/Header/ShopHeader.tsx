@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View  ,TextInput,TouchableOpacity} from 'react-native'
 import { ShopNavigationHeaderProps  } from '../../../types';
 import {Dimensions} from 'react-native';
-import { Ionicons , AntDesign , EvilIcons } from '@expo/vector-icons'; 
+import { Ionicons , AntDesign , EvilIcons , Entypo } from '@expo/vector-icons'; 
 import KeyboardLayout from '../../../../Layout/KeyboardLayout';
 
 interface ShopHeaderProps  extends ShopNavigationHeaderProps{
@@ -18,26 +18,34 @@ function ShopHeader({navigation,route}:ShopHeaderProps) {
                 route.name == "ShopScreen" ?(
                     <Text className='font-bold text-emerald-400 text-2xl'>Shop</Text>
                 ):(
-                    <TouchableOpacity onPress={()=>navigation.goBack()} className="flex-1">
-                        <AntDesign name="arrowleft" size={24} color="black"  />
+                    <TouchableOpacity onPress={()=>navigation.goBack()} className="">
+                        <AntDesign name="arrowleft" size={24} color="rgba(52, 211,153,1)"  />
                     </TouchableOpacity>
                 )
             }
             {
-                route.name=="ShopScreen" && (
-                    <View className="flex-1 flex flex-row items-center py-1 px-2 bg-gray-100  rounded   ">
-                        <TextInput placeholder="Search" className="flex-1  " />
-                        <EvilIcons name="search" size={20} color="black" className="mb-2" />
-                    </View> 
+                route.name=="ShopScreen" ? (
+                    <View className="flex-1 flex flex-row items-center gap-x-[10px]  ">
+                        <View className="flex-1 flex flex-row items-center justify-end py-1 px-2 bg-gray-100  rounded   ">
+                            <TextInput placeholder="Search" className="flex-1  " />
+                            <EvilIcons name="search" size={20} color="rgba(52, 211,153,1)" className="mb-2" />
+                        </View> 
+                        <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
+                            <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
+                        </TouchableOpacity>
+                    </View>
+                   
+                ):(
+                    <View className="flex-1 flex flex-row items-center ">
+                        <View className='flex-1 flex flex-row items-center justify-center '>
+                            <Text className="font-bold text-xl text-zinc-900">{route.name == "ProductDetailsScreen"?"Details Product":"Basket"}</Text>
+                        </View>
+                   
+                        <Entypo name="dots-three-horizontal" size={24} color="rgba(52, 211,153,1)" />
+                    </View>
                 )
             }
-            {
-                route.name != "ShopScreen"&& (
-                    <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
-                        <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
-                    </TouchableOpacity>
-                )
-            }
+    
         </View>
     </KeyboardLayout>
     );

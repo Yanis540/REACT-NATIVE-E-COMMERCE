@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View ,TouchableOpacity } from 'react-native'
 import { HomeNavigationHeaderProps } from '../../../types';
 import {Dimensions} from 'react-native';
-import { Ionicons , AntDesign } from '@expo/vector-icons'; 
+import { Ionicons , AntDesign , Entypo } from '@expo/vector-icons'; 
 function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
     const ScreenWidth = Dimensions.get('window').width;
     return (
@@ -12,16 +12,23 @@ function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
 
                     <Text className='flex-1 font-bold text-emerald-400 text-2xl'>Yanis</Text>
                 ):(
-                    <TouchableOpacity onPress={()=>navigation.goBack()} className="flex-1">
-                        <AntDesign name="arrowleft" size={24} color="black"  />
+                    <TouchableOpacity onPress={()=>navigation.goBack()} className="">
+                        <AntDesign name="arrowleft" size={24} color="rgba(52, 211,153,1)"  />
                     </TouchableOpacity>
                 )
             }
             {
-                route.name =="HomeScreen"&&  (
-                    <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")} className="mr-[15px]">
+                route.name =="HomeScreen"?  (
+                    <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")} className=" flex-1 flex flex-row items-center justify-end mr-[15px]">
                         <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                     </TouchableOpacity>
+                ):(
+                    <View className="flex-1 flex flex-row items-center ">
+                        <View className='flex-1 flex flex-row items-center justify-center '>
+                            <Text className="font-bold text-xl text-zinc-900">{route.name == "ProductDetailsScreen"?"Details Product":"Basket"}</Text>
+                        </View>
+                        <Entypo name="dots-three-horizontal" size={24} color="rgba(52, 211,153,1)" />
+                    </View>
                 )
             }
         </View>

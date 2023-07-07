@@ -26,12 +26,12 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
     const defaultSrc2 = "https://www.pakmobizone.pk/wp-content/uploads/2021/05/HUAWEI-FreeBuds-4i-Red-6.png"
     const description = product?.description??"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex iusto, neque voluptatum ad quae architecto vitae cumque ratione libero atque!"
     const [selectedColor, setSelectedColor] = useState<ColorVariant|undefined>(product?.colors[0]??undefined);
-    if(isLoading)return (<Loader /> )  
     if(error||data?.error)return(
         <View className="flex-1 flex flex-col items-center justify-center bg-white ">
             <Text className="font-bold text-xl text-gray-400">{data?.error?.message??"An Error occured ! "}</Text>
         </View>
     )
+    if(isLoading)return (<Loader /> )  
     return (
         <View className="flex-1 flex w-full bg-white">
             {/* Image */}

@@ -34,8 +34,7 @@ export type AccountNavigationProps =
 
 
 export type ProductDetailsProps =
-    StackScreenProps<HomeStackList,"ProductDetailsScreen"|"BasketScreen">|
-    StackScreenProps<ShopStackList,"ProductDetailsScreen"|"BasketScreen">
+    StackScreenProps<HomeStackList& ShopStackList,"ProductDetailsScreen">
 export type BasketProps =
     StackScreenProps<HomeStackList,"BasketScreen">|
     StackScreenProps<ShopStackList,"BasketScreen">

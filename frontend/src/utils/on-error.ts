@@ -1,6 +1,5 @@
-import { QueryClient  , useQueryClient} from "@tanstack/react-query"
+import { QueryClient  } from "@tanstack/react-query"
 
-const queryClient = useQueryClient()
 
 export const onError = (err:any,key:any[],queryClient:QueryClient)=>{
     if(err.response?.data?.error?.message ){

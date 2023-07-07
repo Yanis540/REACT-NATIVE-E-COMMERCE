@@ -14,7 +14,7 @@ function Home({navigation,route}:HomeProps) {
         <Loader /> 
     )
     return (
-        <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white border border-red-600 '>
+        <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white  '>
             {/* Display categories  */}
             <View className="py-4 mb-4 border-b-[1px] border-gray-200 ">
                 <FlatList
