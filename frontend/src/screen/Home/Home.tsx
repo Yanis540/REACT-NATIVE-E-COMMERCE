@@ -4,24 +4,14 @@ import { HomeProps } from '@/routes/types';
 import React from 'react';
 import { Text,ScrollView, View , Button, FlatList, SafeAreaView} from 'react-native'
 import CategoryCard from './components/CategoryCard';
-import LottieView from 'lottie-react-native';
 import HomeProducts from './components/HomeProducts';
+import Loader from '../../components/Loader/Loader';
 
 function Home({navigation,route}:HomeProps) {
     const {products,isLoading:isLoadingProducts} = useProducts(); 
     const {categories,isLoading:isLoadingCategories,error} = useCategories(); 
     if( isLoadingCategories || isLoadingProducts )return(
-        <View className='flex-1 flex flex-col items-center justify-center bg-white'>
-            <LottieView
-                autoPlay
-                style={{
-                    width: 200,
-                    height: 200,
-                }}
-                // Find more Lottie files at https://lottiefiles.com/featured
-                source={require('./assets/loading.json')}
-            />
-        </View>
+        <Loader /> 
     )
     return (
         <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white border border-red-600 '>

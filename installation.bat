@@ -39,4 +39,6 @@ npm i @tanstack/react-query
 npm i lottie-react-native
 npm  i react-native-animatable
 npm install @react-native-async-storage/async-storage
+npm install react-native-root-toast
+npm i react-native-paper
 : folow this https://www.nativewind.dev/quick-starts/expo

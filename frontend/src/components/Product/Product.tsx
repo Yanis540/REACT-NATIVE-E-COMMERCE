@@ -42,7 +42,7 @@ function Product({navigation,product}:ProductProps) {
                         <Text className="text-gray-400 text-[13px]">{description}</Text>
                     </View>
                 </View>
-                <FavoriteButton productId={product?.id} /> 
+                <FavoriteButton product={product} /> 
             </View>
 
             <View className="flex flex-row items-center justify-between">

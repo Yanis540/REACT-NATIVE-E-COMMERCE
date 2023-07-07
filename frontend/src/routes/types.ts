@@ -12,8 +12,8 @@ export type HomeNavigationHeaderProps =
 
 export type HomeProps =
     CompositeScreenProps< 
-        BottomTabScreenProps<NavigatorTabList>,
-        StackScreenProps<HomeStackList,"HomeScreen">
+        StackScreenProps<HomeStackList,"HomeScreen"|"BasketScreen"|"ProductDetailsScreen">,
+        BottomTabScreenProps<NavigatorTabList>
     >
 
 
@@ -34,8 +34,8 @@ export type AccountNavigationProps =
 
 
 export type ProductDetailsProps =
-    StackScreenProps<HomeStackList,"ProductDetailsScreen">|
-    StackScreenProps<ShopStackList,"ProductDetailsScreen">
+    StackScreenProps<HomeStackList,"ProductDetailsScreen"|"BasketScreen">|
+    StackScreenProps<ShopStackList,"ProductDetailsScreen"|"BasketScreen">
 export type BasketProps =
     StackScreenProps<HomeStackList,"BasketScreen">|
     StackScreenProps<ShopStackList,"BasketScreen">

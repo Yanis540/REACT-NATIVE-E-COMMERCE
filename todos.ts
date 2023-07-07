@@ -1,4 +1,8 @@
 /*
+
+! emerald-400
+
+
 !   FavoriteButton display : Only when user is Logged in
  
 !   UPDATE IMAGES OF PRODUCTS WITH PNG 

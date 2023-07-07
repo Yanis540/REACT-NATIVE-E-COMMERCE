@@ -18,7 +18,7 @@ function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
                 )
             }
             {
-                route.name != "BasketScreen"&& (
+                route.name =="HomeScreen"&&  (
                     <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")} className="mr-[15px]">
                         <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                     </TouchableOpacity>

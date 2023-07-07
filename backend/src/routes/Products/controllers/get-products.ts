@@ -36,7 +36,12 @@ export const get_products = asyncHandler(async(req:Request,res:Response)=>{
             products = await db.product.findMany({
                 
                 include:{
-                    categories:true
+                    categories:true, 
+                    _count:{
+                        select:{
+                            liked_by:true
+                        }
+                    },
                 }
             })
         else 
@@ -74,7 +79,12 @@ export const get_products = asyncHandler(async(req:Request,res:Response)=>{
                     ]
                 },
                 include:{
-                    categories:true
+                    categories:true, 
+                    _count:{
+                        select:{
+                            liked_by:true
+                        }
+                    },
                 }
             })
         res.status(201).json({products});

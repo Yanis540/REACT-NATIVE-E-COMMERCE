@@ -32,7 +32,7 @@ function ShopHeader({navigation,route}:ShopHeaderProps) {
                 )
             }
             {
-                route.name != "BasketScreen"&& (
+                route.name != "ShopScreen"&& (
                     <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
                         <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                     </TouchableOpacity>

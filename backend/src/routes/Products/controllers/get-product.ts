@@ -18,9 +18,15 @@ interface Request extends DefaultRequest {
 export const get_product = asyncHandler(async(req:Request,res:Response)=>{
     const {id} = req.params; 
     const product = await db.product.findFirst({
-        where:{id}, 
+        where:{id},
         include:{
-            categories:true 
+            categories:true, 
+            _count:{
+                select:{
+                    liked_by:true
+                }
+            }, 
+           
         }
     })
     if(!product){

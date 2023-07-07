@@ -1,6 +1,9 @@
 
 export type BasketProduct ={
     ordered_quantity: number
+    color: ColorVariant 
+    size ? : SizeVariant
+    
 }&Product
 
 export type User = {
@@ -25,14 +28,18 @@ export type Product = {
     quantity: number;
     size_variants: SizeVariant[];
     colors: ColorVariant[]
+    likedBy ?: User[]
+    _count ? :{
+        liked_by: number
+    }
 }
 
-enum SizeVariant {
+export enum SizeVariant {
     L="L",
     M="M",
     S="S"
 }
-enum ColorVariant {
+export enum ColorVariant {
     blue="blue",
     red="red",
     green="green",

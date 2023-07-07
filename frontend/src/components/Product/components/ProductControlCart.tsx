@@ -21,7 +21,7 @@ function ProductControlCart({product}:ProductControlCartProps) {
         return basket.find((prodBask)=>prodBask.id == product.id)
     },[basket])
     return (
-    <View className="flex flex-row items-center gap-x-[10px] justify-around" >
+    <View className="flex flex-row items-center gap-x-[25px] justify-around" >
         {
             existsInBasket&& (
                 <TouchableOpacity 
@@ -45,7 +45,7 @@ function ProductControlCart({product}:ProductControlCartProps) {
             onPress={()=>add(product)} 
             onLongPress={handleLongAddPress}
         >
-            <View className="flex flex-col items-center justify-center  bg-emerald-400  rounded-lg p-2 ">
+            <View className={`flex flex-col items-center justify-center  bg-emerald-400  rounded-lg p-2 ${(product.quantity == 0 || existsInBasket?.ordered_quantity == product.quantity )&& "cursor-not-allowed"} `}>
                 
                 <AntDesign name="plus" size={15} color="white" className='font-extrabold'  />
             </View>
