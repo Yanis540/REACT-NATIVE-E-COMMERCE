@@ -10,7 +10,7 @@ function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
             {
                 route.name == "HomeScreen" ? (
 
-                    <Text className='flex-1 font-bold text-teal-400 text-2xl'>Yanis</Text>
+                    <Text className='flex-1 font-bold text-emerald-400 text-2xl'>Yanis</Text>
                 ):(
                     <TouchableOpacity onPress={()=>navigation.goBack()} className="flex-1">
                         <AntDesign name="arrowleft" size={24} color="black"  />
@@ -20,7 +20,7 @@ function HomeHeader({navigation,route}:HomeNavigationHeaderProps) {
             {
                 route.name != "BasketScreen"&& (
                     <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")} className="mr-[15px]">
-                        <Ionicons name="basket-outline" size={24} color="rgba(45, 212, 191,1)" />
+                        <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                     </TouchableOpacity>
                 )
             }

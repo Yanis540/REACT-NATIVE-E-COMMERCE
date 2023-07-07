@@ -2,7 +2,7 @@ import { useProducts } from '../../hooks/use-products';
 import { useCategories } from '../../hooks/use-categories';
 import { HomeProps } from '@/routes/types';
 import React from 'react';
-import { Text, View , Button, FlatList, SafeAreaView} from 'react-native'
+import { Text,ScrollView, View , Button, FlatList, SafeAreaView} from 'react-native'
 import CategoryCard from './components/CategoryCard';
 import LottieView from 'lottie-react-native';
 import HomeProducts from './components/HomeProducts';
@@ -11,7 +11,7 @@ function Home({navigation,route}:HomeProps) {
     const {products,isLoading:isLoadingProducts} = useProducts(); 
     const {categories,isLoading:isLoadingCategories,error} = useCategories(); 
     if( isLoadingCategories || isLoadingProducts )return(
-        <View className='flex-1 flex flex-col items-center justify-center bg-gradient from-white to-zinc-400   border border-red-600'>
+        <View className='flex-1 flex flex-col items-center justify-center bg-white'>
             <LottieView
                 autoPlay
                 style={{
@@ -24,7 +24,7 @@ function Home({navigation,route}:HomeProps) {
         </View>
     )
     return (
-        <View className='flex-1 flex px-5 bg-white '>
+        <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white border border-red-600 '>
             {/* Display categories  */}
             <View className="py-4 mb-4 border-b-[1px] border-gray-200 ">
                 <FlatList
@@ -37,10 +37,18 @@ function Home({navigation,route}:HomeProps) {
                     keyExtractor={(item)=>(item.name as string)}
                 />
             </View>
-            {/* DisPlay Products by categories */}
-            <HomeProducts title='Best Salers' products={products} navigation={navigation} route={route}  />  
+            <View className="flex flex-col mb-4 " >
+                {/* Show case best salers */}
+                <HomeProducts title='Best Salers' products={products} showcase navigation={navigation} route={route}  />  
+                {/* Show products by categories  */}
+                {
+                    categories?.slice(0,3).map((categorie,index)=>(
+                        <HomeProducts key={categorie.name} title={categorie.name} products={categorie.products} navigation={navigation} route={route} /> 
+                    ))
+                }
+            </View>
 
-        </View> 
+        </ScrollView> 
     );
 };
 

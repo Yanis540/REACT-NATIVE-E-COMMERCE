@@ -16,7 +16,7 @@ function ShopHeader({navigation,route}:ShopHeaderProps) {
         <View style={{width:ScreenWidth-20}} className="mt-[40px] flex-1 flex  flex-row items-center gap-[5px] w-screen h-full  ">
             {
                 route.name == "ShopScreen" ?(
-                    <Text className='font-bold text-teal-400 text-2xl'>Shop</Text>
+                    <Text className='font-bold text-emerald-400 text-2xl'>Shop</Text>
                 ):(
                     <TouchableOpacity onPress={()=>navigation.goBack()} className="flex-1">
                         <AntDesign name="arrowleft" size={24} color="black"  />
@@ -34,7 +34,7 @@ function ShopHeader({navigation,route}:ShopHeaderProps) {
             {
                 route.name != "BasketScreen"&& (
                     <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
-                        <Ionicons name="basket-outline" size={24} color="rgba(45, 212, 191,1)" />
+                        <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                     </TouchableOpacity>
                 )
             }

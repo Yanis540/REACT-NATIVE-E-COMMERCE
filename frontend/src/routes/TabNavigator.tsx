@@ -38,7 +38,7 @@ function Navigation({}:NavigationProps) {
                             }
                         }
                     },
-                    tabBarActiveTintColor: 'rgba(45,212,191,1)',
+                    tabBarActiveTintColor: 'rgba(52, 211,153,1)',
                     tabBarInactiveTintColor: 'gray',
                   })}
             >

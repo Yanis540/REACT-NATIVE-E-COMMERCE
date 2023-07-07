@@ -1,24 +1,25 @@
 import { HomeProps } from '@/routes/types';
-import { Product } from '@/types';
 import React from 'react';
 import { Text, View , FlatList } from 'react-native'
-import HomeProduct from './HomeProduct';
+import ShowcaseProduct from './ShowcaseProduct';
+import Product from '../../../components/Product/Product';
+import { Product as ProductType } from '@/types';
 
 interface HomeProductsProps extends HomeProps{
     title : string 
-    products : Product[]
-    product_display ? :boolean 
+    products : ProductType[]
+    showcase ? :boolean 
 };
 
-function HomeProducts({products,title,navigation,product_display=false, route}:HomeProductsProps) {
+function HomeProducts({products,title,navigation,showcase=false, route}:HomeProductsProps) {
     return (
-        <View className="flex flex-col gap-y-[10px]" >
+        <View className="flex flex-col " >
             {/* Top : display title + see more */}
-            <View className="flex flex-row  items-center justify-between ">
+            <View className=" py-4 flex flex-row items-center justify-between ">
                 <Text className="font-bold text-2xl capitalize text-slate-900  ">{title}</Text>
-                <Text className="text-gray-500" onPress={()=>navigation.navigate("Shop")}>See More</Text>
+                <Text className="text-gray-500 mr-5" onPress={()=>navigation.navigate("Shop")}>See More</Text>
             </View>
-            {/*  Down products  */}
+            {/*  Best selers products  */}
            <View>
                 <FlatList
                     horizontal={true}
@@ -26,10 +27,13 @@ function HomeProducts({products,title,navigation,product_display=false, route}:H
                     style={{ flex: 0 }}
                     initialNumToRender={products.length}
                     data={products}
-                    renderItem={({item}) => <HomeProduct navigation={navigation} route={route} product={item}/>}
+                    renderItem={({item}) => 
+                        showcase 
+                        ?   <ShowcaseProduct product={item} navigation={navigation} route={route} />
+                        :   <Product product={item}  navigation={navigation as any} route={route as any} /> 
+                    }
                     keyExtractor={(item)=>(item.name as string)}
                 />
-
            </View>
         </View>
     );

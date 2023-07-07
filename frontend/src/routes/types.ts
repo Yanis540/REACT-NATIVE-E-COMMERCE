@@ -40,3 +40,9 @@ export type BasketProps =
     StackScreenProps<HomeStackList,"BasketScreen">|
     StackScreenProps<ShopStackList,"BasketScreen">
 
+
+//!##################### Product #####################
+
+export type ProductNavigationProps = 
+StackScreenProps<ShopStackList,"ShopScreen">|
+StackScreenProps<HomeStackList,"HomeScreen">

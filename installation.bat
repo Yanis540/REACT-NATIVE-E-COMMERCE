@@ -37,4 +37,6 @@ npm i @react-navigation/native-stack
 npm install zustand
 npm i @tanstack/react-query
 npm i lottie-react-native
+npm  i react-native-animatable
+npm install @react-native-async-storage/async-storage
 : folow this https://www.nativewind.dev/quick-starts/expo

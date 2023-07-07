@@ -1,4 +1,7 @@
 
+export type BasketProduct ={
+    ordered_quantity: number
+}&Product
 
 export type User = {
     id : string 
@@ -38,7 +41,7 @@ enum ColorVariant {
    
 }
 export type  Category = {
-    name :  String 
+    name :  string 
     image ? : string    
     products :Product[]
 }
