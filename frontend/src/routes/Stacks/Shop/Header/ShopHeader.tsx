@@ -3,7 +3,7 @@ import { Text, View  ,TextInput,TouchableOpacity} from 'react-native'
 import { ShopNavigationHeaderProps  } from '../../../types';
 import {Dimensions} from 'react-native';
 import { Ionicons , AntDesign , EvilIcons } from '@expo/vector-icons'; 
-import KeyboardLayout from '../../../../Layout/KeyBoardLayout';
+import KeyboardLayout from '../../../../Layout/KeyboardLayout';
 
 interface ShopHeaderProps  extends ShopNavigationHeaderProps{
 

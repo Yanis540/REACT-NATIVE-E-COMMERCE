@@ -1,10 +1,12 @@
+import { QueryClientProvider  , QueryClient} from '@tanstack/react-query';
 import Navigation from './src/routes/TabNavigator';
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 export default function App() {
+  const queryClient = new QueryClient();
   return (
-    <Navigation /> 
+    <QueryClientProvider client={queryClient}>
+      <Navigation /> 
+    </QueryClientProvider>
   );
 }
 

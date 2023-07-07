@@ -34,4 +34,7 @@ npm i nativewind
 npx tailwindcss init 
 npm install --save-dev tsc-alias
 npm i @react-navigation/native-stack
+npm install zustand
+npm i @tanstack/react-query
+npm i lottie-react-native
 : folow this https://www.nativewind.dev/quick-starts/expo

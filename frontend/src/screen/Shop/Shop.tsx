@@ -1,7 +1,7 @@
-import { ShopProps } from '../../routes/types';
-import KeyboardLayout from '../../Layout/KeyBoardLayout';
 import React from 'react';
 import { Text, View  , Button} from 'react-native'
+import { ShopProps } from '../../routes/types';
+import KeyboardLayout from '../../Layout/KeyboardLayout';
 
 
 

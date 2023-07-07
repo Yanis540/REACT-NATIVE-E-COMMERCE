@@ -14,7 +14,7 @@ model User {
   id                String    @id @default(uuid())
   image             String?
   name              String
-  email             String    @unique
+  email             String?   @unique
   hashedPassword    String
   created_at        DateTime  @default(now())
   favorite_products Product[]
@@ -28,6 +28,7 @@ model Product {
   price          Float
   image          String
   quantity       Int              @default(0)
+  description    String?          @db.Text
   size_variants  SizeVariant[]
   categories     Category[]
   colors         ColorVariant[]
@@ -38,6 +39,7 @@ model Product {
 
 model Category {
   name     String    @id
+  image    String?
   products Product[]
 }
 
