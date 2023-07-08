@@ -11,7 +11,7 @@ import { BasketProps } from '@/routes/types';
 function BasketProducts({navigation,route}:BasketProps) {
     const {basket,remove_all} = useStoreBasket();
     return (
-        <View className="flex-1 flex flex-col  ">
+    <View className="flex-1 flex flex-col  ">
         <SwipeListView
             data={basket}
             className='flex-1 '
@@ -32,7 +32,7 @@ function BasketProducts({navigation,route}:BasketProps) {
             leftOpenValue={0}
             rightOpenValue={60}
         />            
-        </View>
+    </View>
     );
 };
 
