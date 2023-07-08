@@ -16,6 +16,7 @@ model User {
   name              String
   email             String?   @unique
   hashedPassword    String
+  address           String?
   created_at        DateTime  @default(now())
   favorite_products Product[]
   orders            Order[]
@@ -63,6 +64,7 @@ model Order {
   id_user         String
   user            User             @relation(fields: [id_user], references: [id], onDelete: Cascade)
   amount          Int              @default(0)
+  address         String
   checkout_url    String
   checkout_status CheckoutStatus
   payment_status  PaymentStatus

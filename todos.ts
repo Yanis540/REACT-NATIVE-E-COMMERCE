@@ -1,4 +1,9 @@
 /*
+to 
+!   Auth 
+todo    -   Modify the favorite button so only people who are connected that can like this product 
+todo    -   Basket : show if user is not authenticated     
+
 
 ! emerald-400
 

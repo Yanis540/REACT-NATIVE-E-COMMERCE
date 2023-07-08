@@ -6,9 +6,10 @@ import { useStoreBasket } from '../../../context/store/use-store-basket';
 
 interface ProductControlCartProps {
     product : Product
+    reduce_gap? :boolean
 };
 
-function ProductControlCart({product}:ProductControlCartProps) {
+function ProductControlCart({product, reduce_gap}:ProductControlCartProps) {
     const {add,basket, remove,remove_all} = useStoreBasket();
     const handleLongRemovePress= ()=>{
         remove(product)
@@ -21,7 +22,7 @@ function ProductControlCart({product}:ProductControlCartProps) {
         return basket.find((prodBask)=>prodBask.id == product.id)
     },[basket])
     return (
-    <View className="flex flex-row items-center gap-x-[25px] justify-around" >
+    <View className={`flex flex-row items-center ${reduce_gap?"gap-x-[10px]":"gap-x-[25px]"} justify-around`} >
         {
             existsInBasket&& (
                 <TouchableOpacity 

@@ -48,6 +48,7 @@ export const get_order = asyncHandler(async(req:RequestGet,res:Response)=>{
 
 export const bodySchema = z.object({
     basket: basketSchema , 
+    address: z.string(),
     checkout_session_id: z.string() 
 })
 export type BodySchema = z.infer<typeof bodySchema>
@@ -63,7 +64,7 @@ export const add_order = asyncHandler(async(req:RequestAdd,res:Response)=>{
         res.status(403)
         throw new Error("Invalid schema");
     }
-    const {basket,checkout_session_id} = bodySchema.parse(req.body); 
+    const {basket,checkout_session_id, address} = bodySchema.parse(req.body); 
     const alreadyExisting = await db.order.findFirst({
         where:{
             id:checkout_session_id
@@ -86,6 +87,7 @@ export const add_order = asyncHandler(async(req:RequestAdd,res:Response)=>{
         data:{
             id: checkout_session_id, 
             amount:amount , 
+            address : address, 
             products:{
                 connect:productIds
             }, 

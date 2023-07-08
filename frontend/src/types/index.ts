@@ -11,6 +11,7 @@ export type User = {
     image? : string 
     name : string
     email ?: string 
+    address ? : string 
     created_at : string 
     favorite_products : Product []
     orders : Order []  
@@ -24,6 +25,7 @@ export type Product = {
     rating: number;
     description ? : string 
     price: number;
+    address : string 
     image: string;
     quantity: number;
     size_variants: SizeVariant[];
