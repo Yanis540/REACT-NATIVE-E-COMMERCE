@@ -81,7 +81,7 @@ function BasketPayment({}:BasketPaymentProps) {
                     </View>
                 </View>
                 <View className="py-2 mb-2 flex flex-col items-center justify-center w-full bg-emerald-400 rounded-xl   ">
-                    <Text className="text-white font-extrabold text-xl">Continue</Text>
+                    <Text className="text-white font-extrabold text-xl">Pay</Text>
                 </View>
             </View>
         </Collapsible>

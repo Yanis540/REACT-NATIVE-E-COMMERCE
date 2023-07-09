@@ -2,7 +2,6 @@ import {useState} from 'react';
 import { Text, View , ScrollView , Image } from 'react-native'
 import { ProductDetailsProps } from '@/routes/types';
 import { useProduct } from './hooks/use-product';
-import Loader from '../../components/Loader/Loader';
 import FavoriteButton from '../../components/Button/FavoriteButton';
 import { ColorVariant } from '@/types';
 import { RadioButton } from 'react-native-paper';
@@ -10,6 +9,7 @@ import ProductControlCart from '../../components/Product/components/ProductContr
 import { AntDesign } from '@expo/vector-icons';
 import { colors } from '../../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ErrorComponent , Loader } from '../../components';
 
 const possiblesColors = [
     "bg-blue-400/30", 
@@ -27,9 +27,7 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
     const description = product?.description??"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex iusto, neque voluptatum ad quae architecto vitae cumque ratione libero atque!"
     const [selectedColor, setSelectedColor] = useState<ColorVariant|undefined>(product?.colors[0]??undefined);
     if(error||data?.error)return(
-        <View className="flex-1 flex flex-col items-center justify-center bg-white ">
-            <Text className="font-bold text-xl text-gray-400">{data?.error?.message??"An Error occured ! "}</Text>
-        </View>
+        <ErrorComponent data={data} /> 
     )
     if(isLoading)return (<Loader /> )  
     return (

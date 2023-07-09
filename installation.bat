@@ -41,4 +41,10 @@ npm  i react-native-animatable
 npm install @react-native-async-storage/async-storage
 npm install react-native-root-toast
 npm i react-native-paper
+npm install react-native-multiple-select --save
+npm i react-hook-form @hookform/resolvers
+npm install @react-native-material/core
+npm install @react-native-picker/picker --save
+
+
 : folow this https://www.nativewind.dev/quick-starts/expo

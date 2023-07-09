@@ -3,23 +3,26 @@ import { useCategories } from '../../hooks/use-categories';
 import { HomeProps } from '@/routes/types';
 import React from 'react';
 import { Text,ScrollView, View , Button, FlatList, SafeAreaView} from 'react-native'
-import CategoryCard from './components/CategoryCard';
 import HomeProducts from './components/HomeProducts';
-import Loader from '../../components/Loader/Loader';
+import { CategoryCard , ErrorComponent, Loader } from '../../components';
 
 function Home({navigation,route}:HomeProps) {
-    const {products,isLoading:isLoadingProducts} = useProducts(); 
-    const {categories,isLoading:isLoadingCategories,error} = useCategories(); 
+    const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts} = useProducts(); 
+    const {products} = dataProducts
+    const {data:dataCategories,isLoading:isLoadingCategories,error:errorCategories} = useCategories();
+    const {categories} = dataCategories;  
+    const error = errorProducts|| errorCategories ; 
+    if(error)return <ErrorComponent data={dataProducts?.error? dataProducts:dataCategories} /> 
     if( isLoadingCategories || isLoadingProducts )return(
         <Loader /> 
     )
     return (
         <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white  '>
             {/* Display categories  */}
-            <View className="py-4 mb-4 border-b-[1px] border-gray-200 ">
+            <View className="py-4 mb-4  ">
                 <FlatList
                     horizontal={true}
-                    className='flex flex-row gap-x-[10px] px-4 '
+                    className='flex flex-row   '
                     style={{ flex: 0 }}
                     initialNumToRender={categories.length}
                     data={categories}

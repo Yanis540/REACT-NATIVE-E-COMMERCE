@@ -2,7 +2,7 @@ import { HomeProps } from '@/routes/types';
 import React from 'react';
 import { Text, View , FlatList } from 'react-native'
 import ShowcaseProduct from './ShowcaseProduct';
-import Product from '../../../components/Product/Product';
+import {Product} from '../../../components';
 import { Product as ProductType } from '@/types';
 
 interface HomeProductsProps extends HomeProps{

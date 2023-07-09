@@ -25,11 +25,7 @@ function ShopHeader({navigation,route}:ShopHeaderProps) {
             }
             {
                 route.name=="ShopScreen" ? (
-                    <View className="flex-1 flex flex-row items-center gap-x-[10px]  ">
-                        <View className="flex-1 flex flex-row items-center justify-end py-1 px-2 bg-gray-100  rounded   ">
-                            <TextInput placeholder="Search" className="flex-1  " />
-                            <EvilIcons name="search" size={20} color="rgba(52, 211,153,1)" className="mb-2" />
-                        </View> 
+                    <View className="flex-1 flex flex-row items-center justify-end gap-x-[10px]  ">
                         <TouchableOpacity onPress={()=>navigation.navigate("BasketScreen")}>
                             <Ionicons name="basket-outline" size={24} color="rgba(52, 211,153,1)" />
                         </TouchableOpacity>
