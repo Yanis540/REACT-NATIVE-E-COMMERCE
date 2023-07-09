@@ -7,7 +7,6 @@ import { ColorVariant } from '@/types';
 import { RadioButton } from 'react-native-paper';
 import ProductControlCart from '../../components/Product/components/ProductControlCart';
 import { AntDesign } from '@expo/vector-icons';
-import { colors } from '../../styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ErrorComponent , Loader } from '../../components';
 
@@ -29,7 +28,7 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
     if(error||data?.error)return(
         <ErrorComponent data={data} /> 
     )
-    if(isLoading)return (<Loader /> )  
+    if(isLoading)return (<Loader /> ) 
     return (
         <View className="flex-1 flex w-full bg-white">
             {/* Image */}
@@ -38,7 +37,7 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
                     random==0?"bg-blue-400/30": random==1?"bg-violet-400/30": "bg-zinc-400/30"
                 }
             `}>
-                <Image className="w-[80%] h-full  rounded-lg object-cover " source={{uri:product?.image??defaultSrc2}} /> 
+                <Image className="w-[50%] h-full  rounded-lg object-cover " source={{uri:product?.image??defaultSrc2}} /> 
             </View>
             {/* Body */}
             <ScrollView className="flex-1 py-4 px-4">
@@ -89,7 +88,7 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
                         <Text className="font-bold  text-white text-lg ">Continue</Text>
                     </View>
                 </TouchableOpacity>
-                <ProductControlCart product={product!} /> 
+                <ProductControlCart big product={product!} /> 
             </View>
            
         </View>

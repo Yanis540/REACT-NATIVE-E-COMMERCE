@@ -11,6 +11,7 @@ const useSearchProducts = ()=>{
         const {name,categorie} = data; 
         getProducts({name,categories:categorie?[categorie]:[]});
     }  
+    const refresh = ()=>getProducts({})
 
 
     const watched_categories =undefined //watch('categories')
@@ -19,6 +20,7 @@ const useSearchProducts = ()=>{
         onSubmit,
         isLoading,
         data,error,
+        refresh
     }
 }
 

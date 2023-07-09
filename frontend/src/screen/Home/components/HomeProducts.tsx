@@ -30,7 +30,7 @@ function HomeProducts({products,title,navigation,showcase=false, route}:HomeProd
                     renderItem={({item}) => 
                         showcase 
                         ?   <ShowcaseProduct product={item} navigation={navigation} route={route} />
-                        :   <Product product={item}  navigation={navigation as any} route={route as any} /> 
+                        :   <Product product={item}  navigation={navigation as any} route={route as any} className="mr-6 " /> 
                     }
                     keyExtractor={(item)=>(item.name as string)}
                 />

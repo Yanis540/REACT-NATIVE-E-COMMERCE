@@ -43,7 +43,7 @@ function ProductBasket({product, rowMap,isLast,navigation}:ProductBasketProps) {
             </View>
             {/* add/ remove button */}
             <View className="h-full flex flex-col items-center justify-end ">
-                <ProductControlCart reduce_gap product={product} /> 
+                <ProductControlCart product={product} /> 
             </View>
         </View>
     </TouchableOpacity>
