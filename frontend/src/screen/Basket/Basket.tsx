@@ -7,6 +7,7 @@ import { User } from '@/types';
 import DeliveryInformations from './components/DeliveryInformations';
 import BasketPayment from './components/BasketPayment';
 import BasketProducts from './components/BasketProducts';
+import KeyboardLayout from '../../Layout/KeyboardLayout';
 
 
 function Basket({navigation,route}:BasketProps) {
@@ -22,12 +23,14 @@ function Basket({navigation,route}:BasketProps) {
         </View>
     )
     return (
-        <View className="flex-1 flex flex-col gap-y-[10px] bg-white border border-red-500">
+    <KeyboardLayout>
+        <View className="flex-1 flex flex-col gap-y-[10px] bg-white">
             {/* Delivery  */}
             <DeliveryInformations /> 
             <BasketProducts navigation={navigation} route={route} /> 
             <BasketPayment /> 
         </View>
+    </KeyboardLayout>
     );
 };
 

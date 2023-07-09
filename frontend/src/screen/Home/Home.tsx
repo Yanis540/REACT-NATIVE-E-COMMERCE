@@ -2,22 +2,36 @@ import { useProducts } from '../../hooks/use-products';
 import { useCategories } from '../../hooks/use-categories';
 import { HomeProps } from '@/routes/types';
 import React from 'react';
-import { Text,ScrollView, View , Button, FlatList, SafeAreaView} from 'react-native'
+import { Text,ScrollView, View , Button, FlatList, SafeAreaView, RefreshControl} from 'react-native'
 import HomeProducts from './components/HomeProducts';
 import { CategoryCard , ErrorComponent, Loader } from '../../components';
 
 function Home({navigation,route}:HomeProps) {
-    const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts} = useProducts(); 
+    const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts,getAsyncProducts} = useProducts(); 
     const {products} = dataProducts
     const {data:dataCategories,isLoading:isLoadingCategories,error:errorCategories} = useCategories();
     const {categories} = dataCategories;  
     const error = errorProducts|| errorCategories ; 
+    const loading = isLoadingCategories || isLoadingProducts
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(async() => {
+        setRefreshing(true);
+        await getAsyncProducts({})
+        setRefreshing(false)
+    }, []);
+    
     if(error)return <ErrorComponent data={dataProducts?.error? dataProducts:dataCategories} /> 
-    if( isLoadingCategories || isLoadingProducts )return(
+    if( loading && !refreshing )return(
         <Loader /> 
     )
     return (
-        <ScrollView className='flex-1 flex pl-5 overflow-y-scroll bg-white  '>
+        <ScrollView
+            className='flex-1 flex pl-5 overflow-y-scroll bg-white  '
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+        >
             {/* Display categories  */}
             <View className="py-4 mb-4  ">
                 <FlatList
@@ -35,7 +49,7 @@ function Home({navigation,route}:HomeProps) {
                 <HomeProducts title='Best Salers' products={products} showcase navigation={navigation} route={route}  />  
                 {/* Show products by categories  */}
                 {
-                    categories?.slice(0,3).map((categorie,index)=>(
+                    categories?.map((categorie,index)=>(
                         <HomeProducts key={categorie.name} title={categorie.name} products={categorie.products} navigation={navigation} route={route} /> 
                     ))
                 }

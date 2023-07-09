@@ -27,12 +27,12 @@ function ProductBasket({product, rowMap,isLast,navigation}:ProductBasketProps) {
     <TouchableOpacity onPress={()=>navigation.navigate("ProductDetailsScreen",{productId:product.id})}>
         <View className={`flex flex-row items-center px-4 py-4 gap-x-[8px] h-[120px] bg-white  border-t-[1px] ${isLast && "border-b-[1px]"} border-gray-200 z-50  `}>
             {/* Image */}
-            <View className={` flex flex-col items-center justify-center  px-2  py-4  bg-violet-500/30 rounded-lg 
+            <View className={` flex flex-col items-center justify-center h-full  px-2  py-4  bg-violet-500/30 rounded-lg 
                 ${
                     random==0?"bg-blue-400/30": random==1?"bg-violet-400/30": "bg-zinc-400/30"
                 }
             `}>
-                <Image className='h-[60px] w-[60px] object-contain rounded-xl' source={{uri:product.image}}/>
+                <Image className='h-[50px] w-[50px] object-cover rounded-xl' source={{uri:product.image}} style={{resizeMode: 'contain',}} />
             </View>
             {/*  description  */}
             <View className="flex-1 flex flex-col items-start justify-around h-full   ">

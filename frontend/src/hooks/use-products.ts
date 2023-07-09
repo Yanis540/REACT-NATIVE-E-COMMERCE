@@ -2,7 +2,7 @@
 
 import {
     useMutation,
-    UseMutateFunction,
+    UseMutateFunction, UseMutateAsyncFunction, 
     useQueryClient,
   } from '@tanstack/react-query'
 import { useEffect } from "react"
@@ -22,10 +22,15 @@ interface useProductsType  {
         name?: string | undefined;
         categories?: Category[] | undefined;
     }, unknown>
+    mutateAsync : UseMutateAsyncFunction<any, unknown, {
+        name?: string | undefined;
+        categories?: Category[] | undefined;
+    }, unknown>
+
 }   
 const useProducts= ()=>{
     const queryClient = useQueryClient();
-    const {data,error,isLoading,mutate:getProducts}:useProductsType= useMutation({
+    const {data,error,isLoading,mutate:getProducts,mutateAsync:getAsyncProducts}:useProductsType= useMutation({
         mutationKey:["products"], 
         mutationFn:async({name,categories}:{name?:string,categories?:Category[]})=>{
             const response = await axios.post(SERVER_URL+'/products',{name,categories:categories??[]})
@@ -45,7 +50,8 @@ const useProducts= ()=>{
         }, 
         error,
         isLoading,
-        getProducts
+        getProducts, 
+        getAsyncProducts
     }
 }
 

@@ -3,11 +3,11 @@ import { Category } from "@/types";
 import { SeacrhProductFormType } from "../types";
 
 const useSearchProducts = ()=>{
-    const {data,isLoading,getProducts,error} = useProducts()
+    const {data,isLoading,getProducts,error,getAsyncProducts} = useProducts()
 
     
     
-    const onSubmit = async(data:SeacrhProductFormType)=>{
+    const search = async(data:SeacrhProductFormType)=>{
         const {name,categorie} = data; 
         getProducts({name,categories:categorie?[categorie]:[]});
     }  
@@ -17,7 +17,8 @@ const useSearchProducts = ()=>{
     const watched_categories =undefined //watch('categories')
     return {
         watched_categories, 
-        onSubmit,
+        search,
+        searchAsync : getAsyncProducts, 
         isLoading,
         data,error,
         refresh

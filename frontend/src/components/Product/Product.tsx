@@ -1,5 +1,4 @@
 import { HomeNavigationHeaderProps, ShopNavigationHeaderProps } from '@/routes/types';
-import { useStoreBasket } from '../../context/store/use-store-basket';
 import { Product as ProductType } from '@/types';
 import FavoriteButton from '../Button/FavoriteButton';
 import React from 'react';
@@ -29,14 +28,14 @@ function Product({navigation,product,small=false, className, hide_description = 
     const productName = `${product.name.length<13? product.name: product.name.slice(0,13)+"..."}`
     return (
     <TouchableOpacity onPress={()=>navigation.navigate("ProductDetailsScreen",{productId: product.id})} >
-        <View className={`flex flex-col py-4 px-2 w-[90%] ${small ? "min-w-[150px] max-w-[200px]": "min-w-[230px] max-w-[250px]"} drop-shadow-lg border-[1px] border-gray-200 rounded-lg ${className}`}>
+        <View className={`flex flex-col py-4 px-2 w-[90%] ${small ? "min-w-[150px] max-w-[200px]": "min-w-[230px] max-w-[250px]"} h-46 drop-shadow-lg border-[1px] border-gray-200 rounded-lg ${className}`}>
             {/* Image */}
-            <View className={` flex flex-col items-center  justify-center w-full py-4  bg-violet-500/30 rounded-lg 
+            <View className={` flex flex-col items-center justify-center w-full py-4  bg-violet-500/30 rounded-lg 
                 ${
                     random==0?"bg-blue-400/30": random==1?"bg-violet-400/30": "bg-zinc-400/30"
                 }
             `}>
-                <Image className="w-[80%] h-32 rounded-lg object-cover " source={{uri:product?.image??defaultSrc2}} /> 
+                <Image className="w-32 h-32  rounded-lg  " source={{uri:product?.image??defaultSrc2}} style={{resizeMode: 'contain',}} /> 
             </View>
             {/* informations : name */}
             <View className=" flex flex-col items-start py-4 ">
@@ -44,14 +43,14 @@ function Product({navigation,product,small=false, className, hide_description = 
                 <View className="flex flex-row items-center ">
                     <Text  className={`flex-1  font-bold capitalize ${small ?"text-[15px]" : "text-lg"}`}>{productName} </Text>
                     {
-                        !hide_favorite&&(
+                        ! hide_favorite &&(
                             <FavoriteButton product={product} /> 
                         )
                     }
                 </View>
                 {/* description */}
                 {
-                    !hide_description&& (
+                    ! hide_description && (
                         <View >
                             <Text className="text-gray-400 text-[13px]">{description}</Text>
                         </View>

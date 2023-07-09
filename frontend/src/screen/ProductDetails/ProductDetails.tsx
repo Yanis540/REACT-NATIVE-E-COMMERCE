@@ -32,12 +32,12 @@ function ProductDetails({navigation,route}:ProductDetailsProps) {
     return (
         <View className="flex-1 flex w-full bg-white">
             {/* Image */}
-            <View className={` flex flex-col items-center h-[40%]  justify-center w-full py-4  bg-violet-500/30 rounded-lg 
+            <View className={` flex flex-col items-center w-full h-[40%]  justify-center px-4  py-4  bg-violet-500/30 rounded-lg 
                 ${
                     random==0?"bg-blue-400/30": random==1?"bg-violet-400/30": "bg-zinc-400/30"
                 }
             `}>
-                <Image className="w-[50%] h-full  rounded-lg object-cover " source={{uri:product?.image??defaultSrc2}} /> 
+                <Image className="flex-1 w-64 h-64  rounded-lg  " source={{uri:product?.image??defaultSrc2}} style={{resizeMode: 'contain',}} /> 
             </View>
             {/* Body */}
             <ScrollView className="flex-1 py-4 px-4">
