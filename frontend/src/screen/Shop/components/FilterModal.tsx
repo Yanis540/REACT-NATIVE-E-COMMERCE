@@ -31,7 +31,7 @@ function FilterModal({visible, onClose, categories, onSubmit}:FilterModalProps) 
                 {/* Filter fields */}
                 <View className="flex-1 flex flex-col justify-start mt-4">
                     {/* Search by name :  */}
-                    <FilterForm onSubmit={onSubmit} categories={categories} /> 
+                    <FilterForm onSubmit={onSubmit} categories={categories} onClose={onClose} /> 
                 </View>
             </View>
         </Modal>

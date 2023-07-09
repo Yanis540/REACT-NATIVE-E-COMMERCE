@@ -51,7 +51,7 @@ export enum ColorVariant {
 }
 export type  Category = {
     name :  string 
-    image ? : string    
+    image ? : string | null  
     products :Product[]
 }
 

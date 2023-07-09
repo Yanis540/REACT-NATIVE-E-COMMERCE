@@ -8,7 +8,7 @@ const useSearchProducts = ()=>{
     
     
     const onSubmit = async(data:SeacrhProductFormType)=>{
-        const {name,categorie} = data
+        const {name,categorie} = data; 
         getProducts({name,categories:categorie?[categorie]:[]});
     }  
 

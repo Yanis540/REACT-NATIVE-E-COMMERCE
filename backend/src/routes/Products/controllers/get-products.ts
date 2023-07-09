@@ -26,6 +26,7 @@ interface Request extends DefaultRequest {
 export const get_products = asyncHandler(async(req:Request,res:Response)=>{
     try{
         const {categories,name} = bodySchema.parse(req.body);
+        console.log(categories,name)
         const categories_names = !categories?[]:categories!.map((categorie)=>categorie.name); 
         let products: FullProduct[] = [];
         if(

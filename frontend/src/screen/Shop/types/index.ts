@@ -3,7 +3,7 @@ import { z } from "zod"
 export const searchProductForm = z.object({
     name : z.string().optional(), 
     categorie : z.object({ name :  z.string(), 
-        image : z.string().optional(),    
+        image : z.string().nullable().optional(),    
         products :z.array(z.any())
     }).optional()
 })

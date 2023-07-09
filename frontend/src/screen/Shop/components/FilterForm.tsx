@@ -1,5 +1,4 @@
-import {useState} from 'react';
-import { View  , TextInput , Text, ScrollView,TouchableOpacity} from 'react-native'
+import { View  , TextInput , Text, ScrollView,TouchableOpacity } from 'react-native'
 import {toFormikValidationSchema} from "zod-formik-adapter"
 import { searchProductForm , SeacrhProductFormType } from '../types';
 import {Formik} from "formik";
@@ -8,28 +7,29 @@ import {Picker} from '@react-native-picker/picker';
 interface FilterFormProps {
   onSubmit : (data: SeacrhProductFormType) => Promise<void>
   categories : Category[] 
+  onClose : ()=>void 
 };
 
-function FilterForm({onSubmit,categories}:FilterFormProps) {
-  const [selectedLanguage, setSelectedLanguage] = useState("java");
+function FilterForm({onSubmit,categories, onClose}:FilterFormProps) {
 
   return (
     <Formik<SeacrhProductFormType>
-      
       initialValues={{
         name: "",
         categorie:undefined,
       }}
-      onSubmit={(values:SeacrhProductFormType,actions:any) => {
-        actions.resetForm()
+      onSubmit={(values:any,actions:any) => {
         // call api
         onSubmit(values)
+        onClose();
+        // actions.resetForm()
       }}
       validationSchema={toFormikValidationSchema(searchProductForm)}
     >
 
       {
-        ({handleChange,values,setFieldValue,errors,handleSubmit,touched,handleBlur})=>(
+        ({handleChange,values,setFieldValue,errors,handleSubmit,touched,handleBlur,isSubmitting,})=>{
+          return (
           <View className="flex-1 flex flex-col pt-[40px] " >
             {/* Filter */}
             <ScrollView className="flex-1 flex flex-col ">
@@ -69,13 +69,13 @@ function FilterForm({onSubmit,categories}:FilterFormProps) {
               </View>
             </ScrollView>
             {/* Button */}
-            <TouchableOpacity onPress={handleSubmit as any} >
+            <TouchableOpacity   onPress={handleSubmit as ()=>void}>
               <View className="flex flex-col items-center w-full bg-emerald-400  mb-4 pb-3 px- rounded-lg ">
-                <Text className="text-white font-bold text-xl " >Save</Text>
+                <Text className="text-white font-bold text-xl ">Save</Text>
               </View>
             </TouchableOpacity>
           </View>
-        )
+        )}
       } 
   
     </Formik>
