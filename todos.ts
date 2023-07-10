@@ -1,6 +1,6 @@
 /*
 
-
+! FIX : categories menu in shop is overflowing on the right  
 
 next time use this : npm install react-native-material-bottom-navigation
 

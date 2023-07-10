@@ -18,21 +18,20 @@ function FilterModal({visible, onClose, categories, onSubmit}:FilterModalProps) 
             animationType="slide"
             visible={visible}
         >
-            <View className="flex-1 flex flex-col  px-4 ">
+            <View className="flex-1 flex flex-col  px-4  ">
                 {/*!Upper */}
                 <View className="flex flex-row items-center gap-x-[10px]  ">
                     <TouchableOpacity onPress={onClose}>
-                        <AntDesign name="close" size={24} color="rgb(52, 211,153)" />
+                        <View className="border-[1px] border-emerald-400  rounded-full   ">
+                            <AntDesign name="close" size={24} color="rgb(52,211,153)" className=""/>
+                        </View>
                     </TouchableOpacity>
                     <View className="flex flex-col items-center ">
                         <Text className="font-bold text-xl">Filter</Text>
                     </View>
                 </View>
                 {/* Filter fields */}
-                <View className="flex-1 flex flex-col justify-start mt-4">
-                    {/* Search by name :  */}
-                    <FilterForm onSubmit={onSubmit} categories={categories} onClose={onClose} /> 
-                </View>
+                <FilterForm onSubmit={onSubmit} categories={categories} onClose={onClose} /> 
             </View>
         </Modal>
     </KeyboardLayout>

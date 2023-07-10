@@ -1,11 +1,11 @@
 import { BasketProps } from '@/routes/types';
 import ProductControlCart from '../../../components/Product/components/ProductControlCart';
-import { Product } from '@/types';
+import { BasketProduct } from '@/types';
 import React from 'react';
 import { Text, View , Image, TouchableOpacity } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view';
 type ProductBasketProps= {
-    product:Product
+    product:BasketProduct
     rowMap:any
     isLast:boolean
 }&BasketProps;
@@ -38,7 +38,7 @@ function ProductBasket({product, rowMap,isLast,navigation}:ProductBasketProps) {
             <View className="flex-1 flex flex-col items-start justify-around h-full   ">
 
                 <Text className="text-[15px] capitalize font-semibold">{product.name}</Text>
-                <Text className="text-[10px] text-gray-400   ">{description}</Text>
+                <Text className="text-[12px] text-gray-400   ">Color :<Text className='text-zinc-800'> {product.color}</Text></Text>
                 <Text className="text-[17px] text-zinc-900 font-bold   ">{product.price} $</Text>
             </View>
             {/* add/ remove button */}

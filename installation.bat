@@ -45,6 +45,6 @@ npm install react-native-multiple-select --save
 npm i react-hook-form @hookform/resolvers
 npm install @react-native-material/core
 npm install @react-native-picker/picker --save
-
+npm install @likashefqet/react-native-image-zoom
 
 : folow this https://www.nativewind.dev/quick-starts/expo

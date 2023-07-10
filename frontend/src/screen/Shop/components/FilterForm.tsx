@@ -13,6 +13,7 @@ interface FilterFormProps {
 function FilterForm({onSubmit,categories, onClose}:FilterFormProps) {
 
   return (
+  <View className="flex-1 flex flex-col justify-start mt-4">
     <Formik<SeacrhProductFormType>
       initialValues={{
         name: "",
@@ -30,9 +31,9 @@ function FilterForm({onSubmit,categories, onClose}:FilterFormProps) {
       {
         ({handleChange,values,setFieldValue,errors,handleSubmit,touched,handleBlur,isSubmitting,})=>{
           return (
-          <View className="flex-1 flex flex-col pt-[40px] " >
+          <View className="flex-1 flex flex-col pt-[40px]" >
             {/* Filter */}
-            <ScrollView className="flex-1 flex flex-col ">
+            <ScrollView className="flex-1 flex flex-col">
               {/* Text */}
               <View className="flex flex-col py-4" >
                 <TextInput 
@@ -79,6 +80,8 @@ function FilterForm({onSubmit,categories, onClose}:FilterFormProps) {
       } 
   
     </Formik>
+  </View>
+  
   );
 };
 export default FilterForm;
