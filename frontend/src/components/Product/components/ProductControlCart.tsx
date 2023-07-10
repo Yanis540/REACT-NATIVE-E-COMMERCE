@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import { Text, View , TouchableOpacity } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'; 
 import { Product } from '@/types';
-import { useStoreBasket } from '../../../context/store/use-store-basket';
+import { useBasket } from '../../../context/store';
 
 interface ProductControlCartProps {
     product : Product
@@ -10,7 +10,7 @@ interface ProductControlCartProps {
 };
 
 function ProductControlCart({product, big = false }:ProductControlCartProps) {
-    const {add,basket, remove,remove_all} = useStoreBasket();
+    const {add,basket, remove,remove_all} = useBasket();
     const handleLongRemovePress= ()=>{
         remove(product)
     }

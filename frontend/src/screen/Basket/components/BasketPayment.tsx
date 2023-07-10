@@ -2,7 +2,7 @@ import {useMemo, useState} from 'react';
 import { Text, View , TextInput } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { BasketProduct } from '@/types';
-import { useStoreBasket } from '../../../context/store/use-store-basket';
+import { useBasket } from '../../../context/store';
 import Collapsible from 'react-native-collapsible';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -15,7 +15,7 @@ export const calculateTotal = (basket:BasketProduct[])=>{
     return sum ; 
 }
 function BasketPayment({}:BasketPaymentProps) {
-    const {basket} = useStoreBasket(); 
+    const {basket} = useBasket(); 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const toggleCollapsed = ()=>setIsCollapsed(!isCollapsed)
     const isFreeShipping = false ;

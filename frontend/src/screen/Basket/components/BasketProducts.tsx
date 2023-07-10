@@ -1,4 +1,4 @@
-import { useStoreBasket } from '../../../context/store/use-store-basket';
+import { useBasket } from '../../../context/store';
 import React from 'react';
 import { View ,  Text, TouchableOpacity } from 'react-native'
 import ProductBasket from './ProductBasket';
@@ -9,7 +9,7 @@ import { BasketProps } from '@/routes/types';
 
 
 function BasketProducts({navigation,route}:BasketProps) {
-    const {basket,remove_all} = useStoreBasket();
+    const {basket,remove_all} = useBasket();
     return (
     <View className="flex-1 flex flex-col  ">
         <SwipeListView

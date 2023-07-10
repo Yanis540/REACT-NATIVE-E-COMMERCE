@@ -10,7 +10,7 @@ interface BasketState {
   clear_basket:()=>void
 }
 
-const useStoreBasket =  create(
+const useBasket =  create(
     persist<BasketState>(
         (set:any,get:any)=>({
             basket : [], 
@@ -71,5 +71,5 @@ const useStoreBasket =  create(
 
 
 export {
-    useStoreBasket
+    useBasket
 }
