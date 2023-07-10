@@ -5,10 +5,9 @@ import ProductBasket from './ProductBasket';
 import { SwipeListView  } from 'react-native-swipe-list-view';
 import { Feather } from '@expo/vector-icons'; 
 import { colors } from '../../../styles';
-import { BasketProps } from '@/routes/types';
 
 
-function BasketProducts({navigation,route}:BasketProps) {
+function BasketProducts() {
     const {basket,remove_all} = useBasket();
     return (
     <View className="flex-1 flex flex-col  ">
@@ -19,7 +18,6 @@ function BasketProducts({navigation,route}:BasketProps) {
                 <ProductBasket 
                     product={data.item} rowMap={rowMap} 
                     isLast={data.index == basket.length-1} 
-                    navigation={navigation} route={route}
                 /> 
             )}
             renderHiddenItem={ (data, rowMap) => (

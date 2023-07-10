@@ -1,16 +1,15 @@
 import {useState, useCallback} from 'react';
-import { Text, View  , FlatList, TouchableOpacity, ScrollView , RefreshControl} from 'react-native'
-import { ShopProps } from '../../routes/types';
+import { Text, View , TouchableOpacity} from 'react-native'
 import KeyboardLayout from '../../Layout/KeyboardLayout';
 import { Feather } from '@expo/vector-icons';
 import { useCategories } from '../../hooks/use-categories';
-import { CategoryCard , ErrorComponent, Loader, Product} from '../../components';
+import { ErrorComponent, Loader} from '../../components';
 import FilterModal from './components/FilterModal';
 import useSearchProducts from './hooks/use-search-products';
 import ShopMenu from './components/ShopMenu';
 import ShopProducts from './components/ShopProducts';
 
-function Shop({}:ShopProps) {
+function Shop() {
 
     const [isModalOpen , setIsModalOpen] = useState<boolean>(false);
     const [refreshing,setRefreshing] = useState<boolean>(false);

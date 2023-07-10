@@ -1,15 +1,16 @@
-import { HomeProps } from '@/routes/types';
+import { useHomeNavigation } from '../../routes';
 import { Category , } from '@/types';
 import React, { useMemo } from 'react';
 import { Text, View , Image, TouchableOpacity} from 'react-native'
 
-interface CategoryCardProps extends HomeProps {
+interface CategoryCardProps  {
     category : Category, 
     onPress ?: () => void  
     
 };
 
-function CategoryCard({navigation,category,onPress }:CategoryCardProps) {
+function CategoryCard({category,onPress }:CategoryCardProps) {
+    const {navigation} = useHomeNavigation();
     const number_products = useMemo(()=>{
         return category?.products?.length ?? 0 
     },[])

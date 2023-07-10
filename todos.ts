@@ -1,7 +1,7 @@
 /*
 
 
-
+! category card + Product + Details + Basket can have  both : 
 
 
 

@@ -9,21 +9,21 @@ const ShopStackNavigator = createStackNavigator<ShopStackList>();
 
 
 export function ShopStack() {
-    return (
-      <ShopStackNavigator.Navigator
-        screenOptions={({navigation,route}:{navigation:any,route:any})=>{
-            return {
-                animationEnabled:true,
-                headerLeft: ()=> null,
-                headerTitle:()=><ShopHeader navigation={navigation} route={route}  />,
-            }
-        }}
-      >
-        <ShopStackNavigator.Screen name="ShopScreen" component={Shop} />
-        <ShopStackNavigator.Screen name="BasketScreen" component={Basket} />
-        <ShopStackNavigator.Screen name="ProductDetailsScreen" component={ProductDetails} />
-      </ShopStackNavigator.Navigator>
-    );
+  return (
+    <ShopStackNavigator.Navigator
+      screenOptions={()=>{
+        return {
+            animationEnabled:true,
+            headerLeft: ()=> null,
+            headerTitle:()=><ShopHeader   />,
+        }
+      }}
+    >
+      <ShopStackNavigator.Screen name="ShopScreen" component={Shop} />
+      <ShopStackNavigator.Screen name="BasketScreen" component={Basket} />
+      <ShopStackNavigator.Screen name="ProductDetailsScreen" component={ProductDetails} />
+    </ShopStackNavigator.Navigator>
+  );
 }
 export type ShopStackList ={
     ShopScreen : undefined 

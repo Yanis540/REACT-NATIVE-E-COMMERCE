@@ -11,11 +11,11 @@ export function HomeStack() {
   const ScreenWidth = Dimensions.get('window').width;
   return (
   <HomeStackNavigator.Navigator
-    screenOptions={({navigation,route}:{navigation:any,route:any})=>{
+    screenOptions={()=>{
       return {
         animationEnabled:true,
         headerLeft: ()=> null,
-        headerTitle:()=><HomeHeader navigation={navigation} route={route}  />,
+        headerTitle:()=><HomeHeader   />,
       }
     }}
   >

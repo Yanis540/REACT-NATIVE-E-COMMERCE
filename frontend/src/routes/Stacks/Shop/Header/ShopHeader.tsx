@@ -1,15 +1,14 @@
 import React from 'react';
-import { Text, View  ,TextInput,TouchableOpacity} from 'react-native'
-import { ShopNavigationHeaderProps  } from '../../../types';
+import { Text, View ,TouchableOpacity} from 'react-native'
 import {Dimensions} from 'react-native';
-import { Ionicons , AntDesign , EvilIcons , Entypo } from '@expo/vector-icons'; 
+import { Ionicons , AntDesign  , Entypo } from '@expo/vector-icons'; 
 import KeyboardLayout from '../../../../Layout/KeyboardLayout';
+import { useShopNavigation } from "../../../index";
 
-interface ShopHeaderProps  extends ShopNavigationHeaderProps{
 
-};
 
-function ShopHeader({navigation,route}:ShopHeaderProps) {
+function ShopHeader() {
+    const {navigation,route} =  useShopNavigation();
     const ScreenWidth = Dimensions.get('window').width;
     return (
     <KeyboardLayout>

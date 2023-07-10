@@ -1,8 +1,7 @@
 import { Product } from '../../../components';
 import { Product as ProductType } from '@/types';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Text, View , FlatList , RefreshControl } from 'react-native'
+import {  View , FlatList , RefreshControl } from 'react-native'
 
 interface ShopProductsProps {
     products : ProductType[]
@@ -11,8 +10,6 @@ interface ShopProductsProps {
 };
 
 function ShopProducts({products,refreshing,onRefresh}:ShopProductsProps) {
-    const navigation = useNavigation();
-    const route = useRoute();
     return (
         <View className="flex-1 justify-center px-1 ">
             <FlatList 
@@ -26,8 +23,7 @@ function ShopProducts({products,refreshing,onRefresh}:ShopProductsProps) {
                 renderItem={({item})=>(
                     <View className="w-[50%] mb-4">
                         <Product 
-                            product={item} navigation={navigation as any} 
-                            route={route as any} 
+                            product={item} 
                             hide_description hide_favorite small 
                             className="  mx-auto" 
                         /> 

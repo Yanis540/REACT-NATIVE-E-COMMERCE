@@ -1,6 +1,5 @@
 import {useState, useEffect,useMemo} from 'react';
 import { Text, View , ScrollView , Image } from 'react-native'
-import { ProductDetailsProps } from '@/routes/types';
 import { useProduct } from './hooks/use-product';
 import { ColorVariant } from '@/types';
 import ProductControlCart from '../../components/Product/components/ProductControlCart';
@@ -8,10 +7,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ErrorComponent , Loader } from '../../components';
 import ProductDetailsBody from './components/ProductDetailsBody';
 import ProductDetailsImage from './components/ProductDetailsImage';
+import { useProductDetailsNavigation } from '../../routes';
 
 
 
-function ProductDetails({navigation,route}:ProductDetailsProps) {
+function ProductDetails() {
+    const {navigation,route} = useProductDetailsNavigation();
     const {productId} = route.params;
     const {data , isLoading,error} = useProduct(productId);
     

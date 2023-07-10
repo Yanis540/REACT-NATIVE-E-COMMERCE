@@ -2,7 +2,6 @@ import React from 'react';
 import { View , TouchableOpacity , FlatList} from 'react-native'
 import { Feather } from '@expo/vector-icons';
 import { Category } from '@/types';
-import { useNavigation, useRoute } from '@react-navigation/native';
 import { CategoryCard } from '../../../components';
 import { SeacrhProductFormType } from '../types';
 interface ShopMenuProps {
@@ -12,8 +11,6 @@ interface ShopMenuProps {
 };
 
 function ShopMenu({onOpen , categories , search }:ShopMenuProps) {
-    const navigation = useNavigation();
-    const route = useRoute();
     return (
     <View className="flex flex-row items-center  gap-x-[10px] px-4  ">
         <View className="  p-1 border border-gray-200 rounded-lg">
@@ -30,7 +27,6 @@ function ShopMenu({onOpen , categories , search }:ShopMenuProps) {
                 data={categories}
                 renderItem={({item}) => (
                     <CategoryCard 
-                        navigation={navigation as any} route={route as any} 
                         category={item} onPress={()=>{search({categorie:item})}}
                     />
                 )}

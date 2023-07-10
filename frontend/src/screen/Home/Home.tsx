@@ -1,12 +1,11 @@
 import { useProducts } from '../../hooks/use-products';
 import { useCategories } from '../../hooks/use-categories';
-import { HomeProps } from '@/routes/types';
 import React from 'react';
 import { Text,ScrollView, View , Button, FlatList, SafeAreaView, RefreshControl} from 'react-native'
 import HomeProducts from './components/HomeProducts';
 import { CategoryCard , ErrorComponent, Loader } from '../../components';
 
-function Home({navigation,route}:HomeProps) {
+function Home() {
     const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts,getAsyncProducts} = useProducts(); 
     const {products} = dataProducts
     const {data:dataCategories,isLoading:isLoadingCategories,error:errorCategories} = useCategories();
@@ -40,17 +39,17 @@ function Home({navigation,route}:HomeProps) {
                     style={{ flex: 0 }}
                     initialNumToRender={categories.length}
                     data={categories}
-                    renderItem={({item}) => <CategoryCard navigation={navigation} route={route} category={item}/>}
+                    renderItem={({item}) => <CategoryCard category={item}/>}
                     keyExtractor={(item)=>(item.name as string)}
                 />
             </View>
             <View className="flex flex-col mb-4 " >
                 {/* Show case best salers */}
-                <HomeProducts title='Best Salers' products={products} showcase navigation={navigation} route={route}  />  
+                <HomeProducts title='Best Salers' products={products} showcase   />  
                 {/* Show products by categories  */}
                 {
                     categories?.map((categorie,index)=>(
-                        <HomeProducts key={categorie.name} title={categorie.name} products={categorie.products} navigation={navigation} route={route} /> 
+                        <HomeProducts key={categorie.name} title={categorie.name} products={categorie.products}  /> 
                     ))
                 }
             </View>

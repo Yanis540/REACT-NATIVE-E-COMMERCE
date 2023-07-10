@@ -1,5 +1,4 @@
 import { useBasket } from '../../context/store';
-import { BasketProps } from '@/routes/types';
 import React from 'react';
 import { Text, View  , Image, ScrollView} from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
@@ -10,7 +9,7 @@ import BasketProducts from './components/BasketProducts';
 import KeyboardLayout from '../../Layout/KeyboardLayout';
 
 
-function Basket({navigation,route}:BasketProps) {
+function Basket() {
     const {basket} = useBasket();
     const imgUsr = "https://lh3.googleusercontent.com/ogw/AGvuzYat7F1A7-_s8o_zpIRmvVIgHVm44YKG0-DxBWs8=s32-c-mo"
     const user: User={name:"yanis tabellout",email:"yanis@gmail.com",created_at:"2022",id:"1",orders:[],favorite_products:[],image:imgUsr}
@@ -27,7 +26,7 @@ function Basket({navigation,route}:BasketProps) {
         <View className="flex-1 flex flex-col gap-y-[10px] bg-white">
             {/* Delivery  */}
             <DeliveryInformations /> 
-            <BasketProducts navigation={navigation} route={route} /> 
+            <BasketProducts  /> 
             <BasketPayment /> 
         </View>
     </KeyboardLayout>

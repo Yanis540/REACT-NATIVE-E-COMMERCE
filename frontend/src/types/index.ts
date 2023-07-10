@@ -17,7 +17,15 @@ export type User = {
     orders : Order []  
 
 }
-
+export type AuthCredentials = undefined | {
+    access: {
+        token: string 
+        expiresIn : number 
+    }, 
+    refresh:{
+        token : string 
+    }
+}
 
 export type Product = {
     id: string;
