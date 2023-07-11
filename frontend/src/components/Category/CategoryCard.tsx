@@ -18,7 +18,7 @@ function CategoryCard({category,onPress }:CategoryCardProps) {
         if(onPress)
             onPress()
         else 
-            navigation.navigate("Shop")
+            navigation.navigate("Shop",{screen:"ShopScreen"})
     }
     const defaultSrc = "https://img01.ztat.net/article/spp-media-p1/e37890d095c54a87bb9816f2f2f1379e/eb1b66e889354e90b42a0f47f9ce13c5.jpg?imwidth=1800&filter=packshot"
     return (

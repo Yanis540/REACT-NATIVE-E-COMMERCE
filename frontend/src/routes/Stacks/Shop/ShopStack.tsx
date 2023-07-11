@@ -11,6 +11,7 @@ const ShopStackNavigator = createStackNavigator<ShopStackList>();
 export function ShopStack() {
   return (
     <ShopStackNavigator.Navigator
+      initialRouteName='ShopScreen'
       screenOptions={()=>{
         return {
             animationEnabled:true,

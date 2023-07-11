@@ -4,17 +4,41 @@ import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { HomeStackList } from './Stacks/Home/HomeStack';
 import { ShopStackList } from './Stacks/Shop/ShopStack';
 import { AccountStackList } from './Stacks/AccountStack';
-import { NavigatorTabList } from './TabNavigator';
+import { NavigatorTabList } from './Tab/TabNavigator';
+import { AuthStackList } from './Stacks/AuthStack';
+import { NavigatorList } from './Navigator';
+
+//?##################### Stacks #####################
+type GlobalStackParamList <T extends keyof NavigatorList> = 
+    StackNavigationProp<NavigatorList,T>
+
+
+type HomeStackParamList<T extends keyof HomeStackList> = 
+    StackNavigationProp<HomeStackList,T>
+type ShopStackParamList<T extends keyof ShopStackList> = 
+    StackNavigationProp<ShopStackList,T>
+type AccountStackParamList<T extends keyof AccountStackList> = 
+    StackNavigationProp<AccountStackList,T>
+//!##################### Global #####################
+
+export const useGlobaNavigation =()=>{
+    const navigation =  useNavigation<GlobalStackParamList<"Auth">>();
+    const route = useRoute<RouteProp<NavigatorList,"Auth">>()
+    return {navigation,route}
+}
+
+
 
 
 //!##################### Home #####################
-type HomeStackParamList<T extends keyof HomeStackList> = 
-    StackNavigationProp<HomeStackList,T>
     
 type HomeScreenProps =
-    CompositeNavigationProp< 
-        BottomTabNavigationProp<NavigatorTabList,"Home">,
-        HomeStackParamList<keyof HomeStackList>
+    CompositeNavigationProp<
+        GlobalStackParamList<"Content">,
+        CompositeNavigationProp< 
+            BottomTabNavigationProp<NavigatorTabList,"Home">,
+            HomeStackParamList<keyof HomeStackList>
+        >
     >
 export const useHomeNavigation =()=>{
     const navigation =  useNavigation<HomeScreenProps>();
@@ -23,13 +47,15 @@ export const useHomeNavigation =()=>{
 }
 
 //!##################### Shop #####################
-type ShopStackParamList<T extends keyof ShopStackList> = 
-    StackNavigationProp<ShopStackList,T>
+
     
 type ShopScreenProps =
-    CompositeNavigationProp< 
-        BottomTabNavigationProp<NavigatorTabList,"Shop">, 
-        ShopStackParamList<keyof ShopStackList>
+    CompositeNavigationProp<
+        GlobalStackParamList<"Content">,
+        CompositeNavigationProp< 
+            BottomTabNavigationProp<NavigatorTabList,keyof NavigatorTabList>, 
+            ShopStackParamList<keyof ShopStackList>
+        >
     >
 export const useShopNavigation =()=>{
     const navigation =  useNavigation<ShopScreenProps>(); 
@@ -38,8 +64,20 @@ export const useShopNavigation =()=>{
 }
 
 //!##################### Account #####################
-export type AccountNavigationProps = 
-    StackNavigationProp<AccountStackList,"AccountScreen">
+
+type AccountScreenProps =
+    CompositeNavigationProp<
+        GlobalStackParamList<"Content">,
+        CompositeNavigationProp< 
+            BottomTabNavigationProp<NavigatorTabList,keyof NavigatorTabList>, 
+            AccountStackParamList<keyof AccountStackList>
+        >
+    >
+export const useAccountNavigation =()=>{
+    const navigation =  useNavigation<AccountScreenProps>(); 
+    const route = useRoute<RouteProp<AccountStackList,"AccountScreen">>()
+    return {navigation,route}
+}
 
 //!##################### Product Details  #####################
 
@@ -56,11 +94,26 @@ export const useProductDetailsNavigation =()=>{
 //!##################### Basket Details  #####################
 
 type BasketStackParamList <T extends keyof (HomeStackList& ShopStackList) > =
-    StackNavigationProp<HomeStackList& ShopStackList, T>
+    CompositeNavigationProp<
+        GlobalStackParamList<"Content">,
+        StackNavigationProp<HomeStackList& ShopStackList, T>
+    >
 
 export const useBasketNavigation =()=>{
     const navigation =  useNavigation<BasketStackParamList<"BasketScreen">>(); 
     const route = useRoute<RouteProp<HomeStackList&ShopStackList,"ProductDetailsScreen">>()
+
+    return {navigation,route}
+}
+//!##################### AuthStack   #####################
+type AuthStackParamList <T extends keyof AuthStackList > =
+    CompositeNavigationProp<
+        GlobalStackParamList<"Auth">,
+        StackNavigationProp<AuthStackList, T>
+    >
+export const useAuthNavigation =()=>{
+    const navigation =  useNavigation<AuthStackParamList<keyof AuthStackList>>(); 
+    const route = useRoute<RouteProp<AuthStackList>>()
 
     return {navigation,route}
 }
