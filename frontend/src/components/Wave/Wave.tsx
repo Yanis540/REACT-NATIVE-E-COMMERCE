@@ -17,7 +17,7 @@ const defaultBgColor = "rgb(52, 211, 153)"
 
 function Wave({children,customHeight,customTop,customBgColor,pattern="v1"}:WaveProps) {
     return (
-    <View className="border border-violet-500" style={{position: 'relative',width: Dimensions.get('window').width,}}>
+    <View className="" style={{position: 'relative',width: Dimensions.get('window').width,}}>
         <View className=' bg-emerald-400' style={{ backgroundColor: customBgColor??defaultBgColor, height: customHeight??defaultHeight  }}>
             <Svg
                 height="100%"

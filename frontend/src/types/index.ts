@@ -1,4 +1,5 @@
 
+export type AuthProvider= "github"|"google"
 export type BasketProduct ={
     ordered_quantity: number
     color: ColorVariant 
