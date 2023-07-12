@@ -46,5 +46,6 @@ npm i react-hook-form @hookform/resolvers
 npm install @react-native-material/core
 npm install @react-native-picker/picker --save
 npm install @likashefqet/react-native-image-zoom
+npm install react-native-svg
 
 : folow this https://www.nativewind.dev/quick-starts/expo

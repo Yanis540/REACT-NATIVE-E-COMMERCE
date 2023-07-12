@@ -17,7 +17,7 @@ export type User = {
     orders : Order []  
 
 }
-export type AuthCredentials = undefined | {
+export type AuthCredentials = {
     access: {
         token: string 
         expiresIn : number 

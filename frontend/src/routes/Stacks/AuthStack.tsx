@@ -17,8 +17,6 @@ export function AuthStack() {
   const {user} = useAuth();
   const {navigation} = useGlobaNavigation();
   if(user) {
-    console.log(user)
-    console.log("HERE")
     if(navigation.canGoBack())
       navigation.goBack()
     navigation.navigate("Content")
