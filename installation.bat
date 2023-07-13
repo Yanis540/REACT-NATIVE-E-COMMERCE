@@ -47,5 +47,6 @@ npm install @react-native-material/core
 npm install @react-native-picker/picker --save
 npm install @likashefqet/react-native-image-zoom
 npm install react-native-svg
+npm i react-native-toast-notifications
 
 : folow this https://www.nativewind.dev/quick-starts/expo

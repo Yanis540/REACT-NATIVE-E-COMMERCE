@@ -11,14 +11,11 @@ const registerSchema = z.object({
     password : z.string(), 
     confirmPassword: z.string()
 })
-.superRefine(({confirmPassword,password},ctx)=>{
-    if(confirmPassword!=password){
-        ctx.addIssue({
-            code:"custom",
-            message:"Passwords did not match"
-        })
-    }
+.refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"], // path of error
 })
+
 
 type RegisterSchema = z.infer<typeof registerSchema>
 interface Request extends DefaultRequest {
@@ -31,8 +28,10 @@ const register_controller = asyncHandler(async(req:Request,res:Response)=>{
         const {name,email,password} = registerSchema.parse(req.body);
         const existingUser= await db.user.findFirst({where:{email}})
         
-        if(existingUser)
-            throw new Error("Existing User")
+        if(existingUser){
+            res.status(401);
+            throw new Error("Existing User",{cause:"EXISTING_USER"})
+        }
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password,salt);
             
@@ -47,6 +46,9 @@ const register_controller = asyncHandler(async(req:Request,res:Response)=>{
         console.log(err.message,"ERROR_REGISTER")
         if(err instanceof ZodError){
             throw new Error("Invalid Input")
+        }
+        if(err?.cause){
+            throw new Error(err.message,{cause:err.cause})
         }
         if(!(err instanceof PrismaClientKnownRequestError) && !(err instanceof PrismaClientUnknownRequestError)  )
             throw new Error("Error with databaase ")

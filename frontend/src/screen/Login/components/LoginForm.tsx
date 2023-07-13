@@ -3,14 +3,14 @@ import { View  , TextInput , Text,TouchableOpacity, ScrollView, FlatList } from 
 import {toFormikValidationSchema} from "zod-formik-adapter"
 import { loginSchema , LoginSchema } from '../types';
 import {Formik} from "formik";
-import { AuthProvider } from '@/types';
+import { useAuthNavigation } from '../../../routes';
 interface LoginFormProps {
   onSubmit : (data: LoginSchema) => Promise<void>
 };
 
 
 function LoginForm({onSubmit }:LoginFormProps) {
-
+  const {navigation} = useAuthNavigation(); 
   return (
   <Formik<LoginSchema>
     initialValues={{email: "",password:"",}}
@@ -59,7 +59,7 @@ function LoginForm({onSubmit }:LoginFormProps) {
               {/* register */}
               <View className='flex flex-row items-center justify-center gap-2 text-sm px-2 mb-2 '>
                 <Text className="text-gray-500">Don&apos;t have an account?</Text>
-                <TouchableOpacity onPress={()=>{console.log("Register")}} className="underline cursor-pointer ml-2">
+                <TouchableOpacity onPress={()=>{navigation.navigate("RegisterScreen")}} className="underline cursor-pointer ml-2">
                   <Text className="text-emerald-400 ">Register </Text>
                 </TouchableOpacity>
               </View>
