@@ -13,6 +13,29 @@ interface Request extends DefaultRequest {
     }
 }
 
+export const get_favorite_products = asyncHandler(async(req:DefaultRequest, res:Response)=>{
+    const user = await db.user.findFirst({
+        where:{id:req?.user!?.id}, 
+        include:{
+            favorite_products:{
+                include:{
+                    categories:true, 
+                    _count:{
+                        select:{
+                            liked_by:true
+                        }
+                    }, 
+                }
+           
+            }
+        }
+    }); 
+    if(!user){
+        res.status(404)
+        throw new Error("User Not found", {cause:"USER_NOT_FOUND"}) 
+    }
+    res.status(201).json({favorite_products: user.favorite_products})
+})
 
 export const add_favorite_product = asyncHandler(async(req:Request,res:Response)=>{
     const {id} = req.params; 

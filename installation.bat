@@ -48,5 +48,6 @@ npm install @react-native-picker/picker --save
 npm install @likashefqet/react-native-image-zoom
 npm install react-native-svg
 npm i react-native-toast-notifications
-
+npx expo install expo-linear-gradient
+npm i react-native-modal 
 : folow this https://www.nativewind.dev/quick-starts/expo

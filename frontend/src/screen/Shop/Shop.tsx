@@ -7,7 +7,7 @@ import { ErrorComponent, Loader} from '../../components';
 import FilterModal from './components/FilterModal';
 import useSearchProducts from './hooks/use-search-products';
 import ShopMenu from './components/ShopMenu';
-import ShopProducts from './components/ShopProducts';
+import {Products} from '../../components';
 
 function Shop() {
 
@@ -61,7 +61,7 @@ function Shop() {
                 categories={categories.slice(0,5)} search={search}
             /> 
             {/* Products */}
-            <ShopProducts 
+            <Products 
                 products={products} refreshing={refreshing} 
                 onRefresh={onRefresh}
             /> 

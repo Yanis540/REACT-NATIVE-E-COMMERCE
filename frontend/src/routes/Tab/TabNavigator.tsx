@@ -43,7 +43,7 @@ function TabNavigator({}){
     >
         <Tab.Screen name="Home" component={HomeStack} options={{headerShown:false}} />
         <Tab.Screen name="Shop" component={ShopStack} options={{headerShown:false}} />
-        <Tab.Screen name="Account" component={AccountStack} />
+        <Tab.Screen name="Account" component={AccountStack} options={{headerShown:false}} />
     </Tab.Navigator>
     )
 }

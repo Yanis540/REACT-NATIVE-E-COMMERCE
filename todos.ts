@@ -1,8 +1,12 @@
 /*
 
 
-! category card + Product + Details + Basket can have  both : 
-
+!   Payment & Order : 
+todo    -   Add stripe payment :https://stripe.com/docs/payments/accept-a-payment?platform=react-native&ui=payment-sheet#:~:text=To%20initialize%20Stripe%20in%20your,Stripe%20using%20the%20StripeProvider%20component.
+!   
+!   Account 
+todo    -   See orders (only orders not one by one)
+?       -   favorite products 
 
 
 ! FIX : categories menu in shop is overflowing on the right  
@@ -14,18 +18,17 @@ next time use this : npm install react-native-material-bottom-navigation
 !   npm i --save-dev @types/react-native-material-textfield
 
 
-to 
+?   category card + Product + Details + Basket can have  both : 
+
 !   Auth 
-todo    -   Modify the favorite button so only people who are connected that can like this product 
-todo    -   Basket : show if user is not authenticated     
+?       -   Modify the favorite button so only people who are connected that can like this product 
+?       -   Basket : show if user is not authenticated     
 
 !   FavoriteButton display : 
-todo    -   Only when user is Logged in
+?       -   Only when user is Logged in
 
 !   Acccount Screen : 
-todo    -   account screen 
-
-! emerald-400
+?       -   account screen 
 
  
 !   UPDATE IMAGES OF PRODUCTS WITH PNG 

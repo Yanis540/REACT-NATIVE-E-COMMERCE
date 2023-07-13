@@ -15,7 +15,7 @@ export function AccountStack() {
     <AccountStackNavigator.Navigator
       screenOptions={{headerShown:false}}
     >
-      <AccountStackNavigator.Screen name="AccountScreen" component={Account} />
+      <AccountStackNavigator.Screen name="AccountScreen" component={Account} options={{headerShown:false,title:"Hilaw"}} />
     </AccountStackNavigator.Navigator>
   );
 }
