@@ -10,8 +10,10 @@ import { DefaultRequest, JwtPayload } from "../../../types";
 
 const authUser = asyncHandler(async(req:DefaultRequest, res:Response , next:NextFunction)=>{
     try{
-        if(!req?.headers || !req?.headers?.authorization?.startsWith("Bearer") )
+        if(!req?.headers || !req?.headers?.authorization?.startsWith("Bearer") ){
+            res.status(401)
             throw new Error("Unauthorized",{cause:AuthError.UNAUTHORIZED_ACCESS_TOKEN,})
+        }
         const token = req.headers.authorization.split(" ")[1];
         let  decoded:string |JwtPayload;
         try{

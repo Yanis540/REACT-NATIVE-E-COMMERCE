@@ -11,7 +11,7 @@ const generateAccessToken=(id:string)=>{
         accessToken:jwt.sign(
             {id},
             process.env.ACCESS_TOKEN_SECRET!,{
-             expiresIn:'1h'
+             expiresIn:'60d'
             }
         ),
         expiresIn:Date.now() + 600*1000

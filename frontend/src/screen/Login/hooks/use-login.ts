@@ -37,7 +37,7 @@ const useLogin = ()=>{
             const {user,tokens} = data ; 
             if(!user || !tokens) 
                 return ; 
-            set_user({...user,...tokens})
+            set_user({...user,tokens})
             
         }, 
     }); 

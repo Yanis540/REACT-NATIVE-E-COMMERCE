@@ -3,15 +3,15 @@ import { create } from 'zustand'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persist, createJSONStorage } from 'zustand/middleware'
 interface AuthState {
-  user?: User&AuthCredentials |null 
-  set_user: (user:undefined | User&AuthCredentials|null) => void
+  user?: User&{tokens:AuthCredentials} |null 
+  set_user: (user:undefined | User&{tokens:AuthCredentials}|null) => void
 }
 
 const useAuth =  create(
     persist<AuthState>(
         (set:any,get:any)=>({
             user : null, 
-            set_user : (user?:null| User&AuthCredentials)=>set((prev:AuthState)=>{
+            set_user : (user?:null| User&{tokens:AuthCredentials})=>set((prev:AuthState)=>{
                 return {...prev,user:user}
             }),
         }), 

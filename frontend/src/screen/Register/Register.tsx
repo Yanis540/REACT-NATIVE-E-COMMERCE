@@ -21,7 +21,6 @@ function Register({}:RegisterProps) {
         else 
             navigation.navigate("Content")
     }; 
-    console.log(error)    
     return (
     <KeyboardAvoidingView  style={{flex:1}} behavior={Platform.OS === 'ios' ? 'padding' : "height"}>
         <SafeAreaView className="flex-1">

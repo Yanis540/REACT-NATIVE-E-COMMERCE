@@ -38,10 +38,11 @@ export const add_favorite_product = asyncHandler(async(req:Request,res:Response)
             favorite_products:true, 
             
         }
-    })
+    }); 
 
 
-    res.status(200).json({message:"Added to favorite",user:{...user_updated,hashedPassword:undefined}})
+
+    res.status(200).json({message:"Added to favorite",favorite_products:user_updated.favorite_products})
 
  
 })
@@ -75,6 +76,6 @@ export const delete_favorite_product = asyncHandler(async(req:Request,res:Respon
     })
 
 
-    res.status(200).json({message:"Removed from favorite",user:{...user_updated,hashedPassword:undefined}})
+    res.status(200).json({message:"Removed from favorite",favorite_products:user_updated.favorite_products})
  
 })
