@@ -1,10 +1,12 @@
 import {useMemo, useState} from 'react';
-import { Text, View , TextInput } from 'react-native'
+import { Text, View , TextInput, ActivityIndicator } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { BasketProduct } from '@/types';
-import { useBasket } from '../../../context/store';
+import { useAuth, useBasket } from '../../../context/store';
 import Collapsible from 'react-native-collapsible';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useStripePayment } from '../hooks/use-stripe-payment';
+import { useBasketNavigation } from '../../../routes';
 
 interface BasketPaymentProps {
 
@@ -16,17 +18,24 @@ export const calculateTotal = (basket:BasketProduct[])=>{
 }
 function BasketPayment({}:BasketPaymentProps) {
     const {basket} = useBasket(); 
+    const {user} = useAuth(); 
+    const {navigation } = useBasketNavigation(); 
+    const {pay,isPaying} = useStripePayment({basket});
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const toggleCollapsed = ()=>setIsCollapsed(!isCollapsed)
     const isFreeShipping = false ;
     const shippingPrice = isFreeShipping?0 : 5
     const isCouponAvailable = true ;
     const couponReduction = !isCouponAvailable ?0: 0.05;
-    const total = useMemo(()=>{
-        return calculateTotal(basket);
-    },[basket]);
+    const total = useMemo(()=> calculateTotal(basket),[basket]);
     const actualTotal = (!isCouponAvailable? total:total*(1-couponReduction))+ (shippingPrice)
-
+    const handlePress= ()=>{
+        if(user)
+            if(!isPaying)
+                pay()
+        else 
+            navigation.navigate("Auth",{screen:"LoginScreen"})
+    }
     return (
     <>
         {
@@ -80,9 +89,22 @@ function BasketPayment({}:BasketPaymentProps) {
                         <Text className="text-emerald-400 font-extrabold text-2xl">${actualTotal}</Text>
                     </View>
                 </View>
-                <View className="py-2 mb-2 flex flex-col items-center justify-center w-full bg-emerald-400 rounded-xl   ">
-                    <Text className="text-white font-extrabold text-xl">Pay</Text>
-                </View>
+                
+                <TouchableOpacity onPress={handlePress}>
+
+                    <View className={`py-2 mb-2 flex flex-col items-center justify-center w-full bg-emerald-400 rounded-xl `}>
+                        <Text className="text-white font-extrabold text-xl">
+                        {
+                            user
+                            ?
+                                !isPaying
+                                ?   "Pay"
+                                :   <ActivityIndicator color="white" />
+                            :"Log In first "
+                        }
+                        </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         </Collapsible>
     </>

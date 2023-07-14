@@ -47,15 +47,13 @@ export const get_order = asyncHandler(async(req:RequestGet,res:Response)=>{
 
 
 export const bodySchema = z.object({
-    basket: basketSchema , 
-    address: z.string(),
-    checkout_session_id: z.string() 
+    paymentIntent_id: z.string()
 })
 export type BodySchema = z.infer<typeof bodySchema>
 interface RequestAdd extends DefaultRequest {
     body:BodySchema
 }
-export const add_order = asyncHandler(async(req:RequestAdd,res:Response)=>{
+export const confirm_order = asyncHandler(async(req:RequestAdd,res:Response)=>{
     
     try{
         bodySchema.parse(req.body)
@@ -64,69 +62,35 @@ export const add_order = asyncHandler(async(req:RequestAdd,res:Response)=>{
         res.status(403)
         throw new Error("Invalid schema");
     }
-    const {basket,checkout_session_id, address} = bodySchema.parse(req.body); 
-    const alreadyExisting = await db.order.findFirst({
+    const {paymentIntent_id} = bodySchema.parse(req.body); 
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntent_id); 
+    if(!paymentIntent){
+        res.status(404);
+        throw new Error(`No transaction with number ${paymentIntent} `)
+    }
+    const existing = await db.order.findFirst({
         where:{
-            id:checkout_session_id
-        }
-    })
-    if(alreadyExisting){
-        res.status(403)
-        throw  new Error("Order already passed");
-    }
-
-    const stripeSession= await stripe.checkout.sessions.retrieve(checkout_session_id);
-    if(!stripeSession?.status){
-        res.status(401)
-        throw new Error('Invalid Checkout Session');
-    }
-    const productIds = basket.map((product)=>({id:product.id}));
-    const amount = calculateTotal(basket);
-
-    const order = await db.order.create({
-        data:{
-            id: checkout_session_id, 
-            amount:amount , 
-            address : address, 
-            products:{
-                connect:productIds
-            }, 
-            basket:{
-                create:basket.map((basketProduct)=>({
-                    product:{
-                        connect:{
-                            id:basketProduct.id
-                        }
-                    }, 
-                    quantity: basketProduct.quantity, 
-                    size: basketProduct.size, 
-                    color: basketProduct.color, 
-
-                }))
-            },
+            id:paymentIntent_id,
             user:{
-                connect:{
-                    id:(req.user?.id! as string)
-                }
-            }, 
-            checkout_url : stripeSession.url??'', 
-            checkout_status: stripeSession.status, 
-            payment_status: stripeSession.payment_status, 
-            type: stripeSession.submit_type??'',
-            status : "progress"
-        }, 
-        include:{
-            basket: {
-                include:{
-                    product:{
-                        include:{
-                            categories:true
-                        }
-                    }
-                }
+                id:req.user!?.id
             }
         }
-    });
+    })
+    if(!existing){
+        res.status(404)
+        throw  new Error(`No order with id ${paymentIntent_id} passed`);
+    }
+    if(existing.payment_status=="succeeded"){
+        res.status(401); 
+    }
+    const updatedOrder = await db.order.update({
+        where:{id:paymentIntent_id}, 
+        data:{
+            status:"progress",
+            payment_status:paymentIntent.status
+        }
+    })
+    
 
     res.status(200).json({message:"Order passed ! "})
 

@@ -14,18 +14,18 @@ const payementBodySchema = z.object({
 interface RequestGet extends DefaultRequest {
     body:z.infer<typeof payementBodySchema>
 }
-const try_product:ProductBasket = {
-    id: "20a0b09f-4fcb-48e7-a819-a2394638af0a", 
-    name: "Black Shirt",
-    image:"https://cdn.shopify.com/s/files/1/0752/6435/products/IMG_0166_2fea8735-d493-49c3-8b4c-8e4392dc2ce4.jpg?v=1668772433",
-    price: 10,
-    quantity: 10, 
-    color:"black",
-    categories : [
-        { name: 'T-shirts'}, 
-        { name: 'Men'}, 
-    ]
-}
+// const try_product:ProductBasket = {
+//     id: "20a0b09f-4fcb-48e7-a819-a2394638af0a", 
+//     name: "Black Shirt",
+//     image:"https://cdn.shopify.com/s/files/1/0752/6435/products/IMG_0166_2fea8735-d493-49c3-8b4c-8e4392dc2ce4.jpg?v=1668772433",
+//     price: 10,
+//     quantity: 10, 
+//     color:"black",
+//     categories : [
+//         { name: 'T-shirts'}, 
+//         { name: 'Men'}, 
+//     ]
+// }
 
 
 export const stripeCheckout = asyncHandler(async(req:RequestGet,res:Response)=>{

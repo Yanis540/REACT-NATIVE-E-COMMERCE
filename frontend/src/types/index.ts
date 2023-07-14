@@ -69,10 +69,8 @@ export type Order =  {
     date   :         string         
     user    :        User             
     amount   :       number             
-    checkout_url  :  string
-    checkout_status: CheckoutStatus
-    payment_status:  PaymentStatus
-    type       :     string
+    payment_status :PaymentIntentStatus
+    type       :     string[]
     status:          OrderStatus
     products:       Product[]
     basket  :        OrderedProduct[]
@@ -87,10 +85,14 @@ export type OrderedProduct ={
     color : ColorVariant
 }
   
-enum CheckoutStatus {
-    open = "open", 
-    complete = "complete", 
-    expired= "expired"
+enum PaymentIntentStatus {
+    canceled = "canceled", 
+    processing = "processing", 
+    requires_action= "requires_action", 
+    requires_capture= "requires_capture", 
+    requires_confirmation= "requires_confirmation", 
+    requires_payment_method= "requires_payment_method", 
+    succeeded= "succeeded", 
 }
 enum PaymentStatus {
     paid="paid",

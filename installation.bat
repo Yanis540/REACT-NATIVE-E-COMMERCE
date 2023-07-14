@@ -6,7 +6,7 @@ npm i  prisma  ts-node  @types/express @types/node
 npm install @prisma/client
 npx tsc --init
 npx prisma init
-
+npm i stripe 
 
 
 : Front 
@@ -49,5 +49,6 @@ npm install @likashefqet/react-native-image-zoom
 npm install react-native-svg
 npm i react-native-toast-notifications
 npx expo install expo-linear-gradient
-npm i react-native-modal 
+npm i react-native-modal
+npm install @stripe/stripe-react-native 
 : folow this https://www.nativewind.dev/quick-starts/expo

@@ -59,19 +59,17 @@ enum ColorVariant {
 }
 
 model Order {
-  id              String           @id @default(uuid())
-  date            DateTime         @default(now())
-  id_user         String
-  user            User             @relation(fields: [id_user], references: [id], onDelete: Cascade)
-  amount          Int              @default(0)
-  address         String
-  checkout_url    String
-  checkout_status CheckoutStatus
-  payment_status  PaymentStatus
-  type            String
-  status          OrderStatus
-  products        Product[]
-  basket          OrderedProduct[]
+  id             String              @id @default(uuid())
+  date           DateTime            @default(now())
+  id_user        String
+  user           User                @relation(fields: [id_user], references: [id], onDelete: Cascade)
+  amount         Int                 @default(0)
+  address        String
+  payment_status PaymentIntentStatus
+  type           String[]
+  status         OrderStatus
+  products       Product[]
+  basket         OrderedProduct[]
 }
 
 model OrderedProduct {
@@ -92,10 +90,14 @@ enum PaymentStatus {
   no_payment_required
 }
 
-enum CheckoutStatus {
-  open
-  complete
-  expired
+enum PaymentIntentStatus {
+  canceled
+  processing
+  requires_action
+  requires_capture
+  requires_confirmation
+  requires_payment_method
+  succeeded
 }
 
 enum OrderStatus {

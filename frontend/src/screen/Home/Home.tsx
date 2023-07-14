@@ -1,6 +1,6 @@
 import { useProducts } from '../../hooks/use-products';
 import { useCategories } from '../../hooks/use-categories';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Text,ScrollView, View , Button, FlatList, SafeAreaView, RefreshControl} from 'react-native'
 import HomeProducts from './components/HomeProducts';
 import { CategoryCard , ErrorComponent, Loader } from '../../components';
@@ -19,8 +19,12 @@ function Home() {
         await getAsyncProducts({})
         setRefreshing(false)
     }, []);
-    
-    if(error)return <ErrorComponent data={dataProducts?.error? dataProducts:dataCategories} /> 
+                    
+    if(error)return (
+    <RefreshControl refreshing={refreshing} onRefresh={onRefresh}>
+        <ErrorComponent data={dataProducts?.error? dataProducts:dataCategories} /> 
+    </RefreshControl>
+    )
     if( loading && !refreshing )return(
         <Loader /> 
     )

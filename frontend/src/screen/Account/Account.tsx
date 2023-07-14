@@ -33,7 +33,7 @@ function Account({}:AccountProps) {
                 {/* Bottom */}
                 <TouchableWithoutFeedback onPress={handlePress}>
                     <View className="flex flex-col items-center justify-center  mx-auto bg-emerald-400 text-teal-400 rounded-md py-1 px-4 mb-2 ">
-                        <Text className='text-white font-bold text-xl '>{user?"Log Out": "Log In "} </Text>
+                        <Text className='text-white font-bold text-md '>{user?"Log Out": "Log In "} </Text>
                     </View>
                 </TouchableWithoutFeedback>
            </View>

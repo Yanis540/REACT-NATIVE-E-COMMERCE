@@ -6,6 +6,7 @@ todo    -   Add stripe payment :https://stripe.com/docs/payments/accept-a-paymen
 !   
 !   Account 
 todo    -   See orders (only orders not one by one)
+TODO    -   Modify profile 
 ?       -   favorite products 
 
 

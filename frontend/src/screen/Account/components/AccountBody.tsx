@@ -19,7 +19,7 @@ function AccountBody({}:AccountBodyProps) {
     const [accountOption, setAccountOption] = useState<AccountOption>(undefined) ; 
 
     return (
-        <View className="flex-1 flex px-4 py-2 border border-red-600">
+        <View className="flex-1 flex px-4 py-2 ">
            {/*  */}
            <FlatList 
                 data={account_options}

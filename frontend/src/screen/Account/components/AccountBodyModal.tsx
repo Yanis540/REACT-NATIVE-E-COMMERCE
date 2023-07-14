@@ -7,7 +7,7 @@ interface AccountBodyModalProps {
     onClose: ()=>void 
     visible : boolean 
     option ?: string   
-    children ?: ReactNode
+    children ?: ReactNode|null
 };
 
 function AccountBodyModal({children,onClose , visible,option}:AccountBodyModalProps) {
