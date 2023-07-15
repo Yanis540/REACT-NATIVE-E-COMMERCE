@@ -36,7 +36,7 @@ function OrderElement({order}:OrderElementProps) {
                     <Text className="text-[15px] text-zinc-900 font-bold   ">{order.amount} $</Text>
                     {/* Payment Status */}
                     <Text 
-                        className={`text-[12px] ml-1 rounded-lg py-1 px-2 ${
+                        className={`text-[12px] ml-1 rounded-lg font-bold py-1 px-2 ${
                             order.payment_status == "succeeded"
                             ?   "bg-emerald-400 text-white "
                             :   order.payment_status == "canceled"
@@ -49,7 +49,7 @@ function OrderElement({order}:OrderElementProps) {
                 </View>
             </View>
             <View className="flex flex-col items-center justify-center  h-full ">
-                <Text className={`text-[12px] ml-1 rounded-lg py-1 px-2 ${
+                <Text className={`text-[12px] ml-1 rounded-lg font-bold py-1 px-2 ${
                     order.status == "delivered"
                     ?   "bg-emerald-400 text-white "
                     :   order.status == "cancelled"
@@ -57,7 +57,7 @@ function OrderElement({order}:OrderElementProps) {
                         :   "bg-gray-400/20 text-gray-600"
                     }`} >
                         {order.status}
-                    </Text>
+                </Text>
             </View>
         </View>
     </TouchableOpacity>

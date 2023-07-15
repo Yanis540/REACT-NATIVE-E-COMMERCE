@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Text, View , TouchableOpacity , RefreshControl , FlatList, Image} from 'react-native'
+import { Text, View , TouchableOpacity , RefreshControl , FlatList, ActivityIndicator} from 'react-native'
 import { userOrders } from './hooks/use-orders';
 import { ErrorComponent } from '../../components';
 import { Feather } from '@expo/vector-icons';
@@ -23,7 +23,7 @@ function Orders({}:OrdersProps) {
         setRefreshing(false)
     }, []);
     if(error)return <ErrorComponent data={data} /> 
-    if(isLoading && !refreshing )return (null)
+    if(isLoading )return (<View className="flex-1 flex h-full bg-white"><ActivityIndicator color="black" /></View>)
     if(!error && !isLoading && orders.length == 0 )return (
         <View className="flex-1 flex flex-col items-center justify-center gap-y-[20px] bg-white  ">
             <Text className="text-gray-400 font-bold text-xl">No Orders passed </Text>

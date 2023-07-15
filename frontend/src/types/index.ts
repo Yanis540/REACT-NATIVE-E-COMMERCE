@@ -70,6 +70,7 @@ export type Order =  {
     user    :        User             
     amount   :       number             
     payment_status :PaymentIntentStatus
+    address ?: string 
     type       :     string[]
     status:          OrderStatus
     products:       Product[]

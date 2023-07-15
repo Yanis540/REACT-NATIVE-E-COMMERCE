@@ -90,7 +90,6 @@ export const stripePaymentIntent = asyncHandler(async(req:RequestGet,res:Respons
   }
 
   catch(err:any){
-    console.log("HERE")
     console.log(err.message,"PAYMENT_INTENT")
     if(err instanceof ZodError){
       res.status(401);

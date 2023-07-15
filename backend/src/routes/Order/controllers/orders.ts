@@ -9,7 +9,6 @@ interface Request extends DefaultRequest {
 
 
 export const get_orders = asyncHandler(async(req:Request,res:Response)=>{
-    console.log("HERE")
     const orders= await db.order.findMany({
         where:{
             user:{
