@@ -1,4 +1,4 @@
- import axios from "axios"
+ import axios, { AxiosError } from "axios"
 
 import {
     useMutation,
@@ -8,7 +8,7 @@ import {
 import { useEffect } from "react"
 import { Category, Product } from "../types"
 import { SERVER_URL } from "../env"
-import { onError } from "../utils"
+import { useToast } from "react-native-toast-notifications"
   
 interface useProductsType  {
     data ?:{
@@ -29,7 +29,7 @@ interface useProductsType  {
 
 }   
 const useProducts= ()=>{
-    const queryClient = useQueryClient();
+    const toast = useToast(); 
     const {data,error,isLoading,mutate:getProducts,mutateAsync:getAsyncProducts}:useProductsType= useMutation({
         mutationKey:["products"], 
         mutationFn:async({name,categories}:{name?:string,categories?:Category[]})=>{
@@ -37,7 +37,16 @@ const useProducts= ()=>{
             const data = await response.data
             return data;
         }, 
-        onError:(err)=>onError(err,["products"],queryClient)
+        onError:(err)=>{
+            if(err instanceof AxiosError){
+                return toast.show(
+                    err?.response?.data?.error?.message?
+                    err?.response?.data?.error?.message
+                    :err.status == 401 ? "Unauthorized" : "Internal Server Error please try again",
+                    {type:"danger"})
+            }
+            toast.show("Unexpected error",{type:"danger"})
+        }
        
     })
     useEffect(()=>{

@@ -1,5 +1,5 @@
 import {useState, useCallback} from 'react';
-import { Text, View , TouchableOpacity} from 'react-native'
+import { Text, View , TouchableOpacity , RefreshControl} from 'react-native'
 import KeyboardLayout from '../../Layout/KeyboardLayout';
 import { Feather } from '@expo/vector-icons';
 import { useCategories } from '../../hooks/use-categories';
@@ -17,21 +17,25 @@ function Shop() {
     const {data:dataCategories,isLoading:isLoadingCategories,error:errorCategories} = useCategories();
     const {
         data:dataProducts,error:errorProducts,isLoading:isLoadingProducts,
-        refresh,search,searchAsync
+        refresh,search
     } = useSearchProducts();
 
     const {categories} =dataCategories;
     const {products} = dataProducts; 
 
-    const error = errorCategories||errorProducts;
-    const isLoading = isLoadingCategories||isLoadingProducts; 
+    const error = errorCategories??errorProducts;
+    const isLoading = isLoadingCategories??isLoadingProducts; 
 
     const onRefresh = useCallback(async() => {
         setRefreshing(true);
-        await searchAsync({})
+        search({})
         setRefreshing(false)
     }, []);
-    if(error)return <ErrorComponent data={dataCategories?.error?dataCategories:dataProducts} /> 
+    if(error)return (
+    <RefreshControl className='flex-1 bg-white border' refreshing={refreshing} onRefresh={onRefresh}>
+        <ErrorComponent data={dataCategories?.error?dataCategories:dataProducts} /> 
+    </RefreshControl>
+    )
     if(isLoading && ! refreshing)return (<Loader />  )
     if(!error && !isLoading && products.length == 0 )return (
         <View className="flex-1 flex flex-col items-center justify-center gap-y-[20px] bg-white  ">

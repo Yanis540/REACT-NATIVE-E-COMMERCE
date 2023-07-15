@@ -95,6 +95,7 @@ export const get_products = asyncHandler(async(req:Request,res:Response)=>{
             res.status(403)
             throw new Error("Type conversion error")
         }
+        res.status(500)
         console.log(err.message,"ERROR_PRODUCTS"); 
         throw new Error("Internal Error Server")
     }

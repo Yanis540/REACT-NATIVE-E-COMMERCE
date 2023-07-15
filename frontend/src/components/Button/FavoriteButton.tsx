@@ -5,13 +5,11 @@ import { colors } from '../../styles';
 import { Product } from '@/types';
 import { useAuth } from '../../context/store';
 import { useFavoriteProduct } from '../../hooks/use-favorite-product';
-import { useToast } from 'react-native-toast-notifications';
 interface FavoriteButtonProps {
     product : Product
 };
 
 function FavoriteButton({product}:FavoriteButtonProps) {
-    const toast = useToast(); 
     const {user} = useAuth();
     const {adding:{add,data},removing:{remove}} = useFavoriteProduct(product?.id??"");
     const isFavorite = useMemo(()=>{
@@ -21,9 +19,9 @@ function FavoriteButton({product}:FavoriteButtonProps) {
     },[user?.favorite_products])
     const toggleFavorite = async()=>{
         if(isFavorite)
-            await remove().catch((err:any)=>toast.show("Error occured"))
+            remove()
         else 
-            await add().catch((err:any)=>toast.show("Error occured"))
+            add()
     }
     if(!user) 
         return null ; 

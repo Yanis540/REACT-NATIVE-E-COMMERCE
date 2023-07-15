@@ -1,8 +1,9 @@
 import { Product } from "@/types"
 import { useAuth } from "../context/store"
 import { SERVER_URL } from "../env"
-import { UseMutateAsyncFunction, useMutation, useQueryClient } from "@tanstack/react-query"
+import { UseMutateAsyncFunction, UseMutateFunction, useMutation, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError, AxiosRequestConfig } from "axios"
+import { useToast } from "react-native-toast-notifications"
 
 type DataResponse ={
     favorite_products ? : Product[],
@@ -11,15 +12,17 @@ type DataResponse ={
 interface  useFavoriteMutationType {
 
     mutateAsync : UseMutateAsyncFunction<any, unknown, void, unknown>
+    mutate : UseMutateFunction<any, unknown, void, unknown>
     error: unknown 
     data ?: DataResponse
     isLoading : boolean
 }
 const useFavoriteProduct = (productId:string)=>{
     const {user,set_user} = useAuth(); 
+    const toast = useToast(); 
     const queryClient = useQueryClient(); 
     const config:AxiosRequestConfig<{}> = {headers:{authorization:`Bearer ${user?.tokens?.access.token??""}`}}
-    const {data:dataIsAdding,isLoading:isLoadingAdding,error:errorAdding,mutateAsync:add} : useFavoriteMutationType = useMutation({
+    const {data:dataIsAdding,isLoading:isLoadingAdding,error:errorAdding,mutate:add} : useFavoriteMutationType = useMutation({
         mutationKey:["post","products","favorite","productId"], 
         mutationFn:async()=>{
             const response = await axios.post(`${SERVER_URL}/products/favorite/${productId}`,{},config)
@@ -46,7 +49,14 @@ const useFavoriteProduct = (productId:string)=>{
             })
         },
         onError:(err:any)=>{
-            console.log(err)
+            if(err instanceof AxiosError){
+                return toast.show(
+                    err?.response?.data?.error?.message?
+                    err?.response?.data?.error?.message
+                    :err.status == 401 ? "Unauthorized" : "Internal Server Error please try again",
+                    {type:"danger"})
+            }
+            toast.show("Unexpected error",{type:"danger"})
         }
 
     }) 

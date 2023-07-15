@@ -31,8 +31,15 @@ const userOrders = ()=>{
             const data = await response.data ; 
             return data ; 
         }, 
-        onError:(err:AxiosError)=>{
-            toast.show((err.response?.data as any )?.error.message??"Unexpected Error"); 
+        onError:(err:any)=>{
+            if(err instanceof AxiosError){
+                return toast.show(
+                    err?.response?.data?.error?.message?
+                    err?.response?.data?.error?.message
+                    :err.status == 401 ? "Unauthorized" : "Internal Server Error please try again",
+                    {type:"danger"})
+            }
+            toast.show("Unexpected error",{type:"danger"})
         }
     }); 
     return {

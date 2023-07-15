@@ -1,11 +1,12 @@
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 
 import {
-    useQuery, useQueryClient, 
+    useQuery, 
   } from '@tanstack/react-query'
 import { Product } from "../../../types"
 import { SERVER_URL } from "../../../env"
-import { onError } from "../../../utils"
+import { useToast } from "react-native-toast-notifications"
+
 interface useProductType  {
     data ?:{
         product: Product
@@ -16,8 +17,7 @@ interface useProductType  {
    
 }   
 export const useProduct= (productId: string )=>{
-    const queryClient = useQueryClient()
-
+    const toast = useToast()
     const {data,error,isLoading}:useProductType= useQuery({
         queryKey:["products",productId], 
         queryFn:async()=>{
@@ -26,7 +26,16 @@ export const useProduct= (productId: string )=>{
             return data;
           
         }, 
-        onError:(err:any)=>onError(err,["products",productId],queryClient)
+        onError:(err:any)=>{
+            if(err instanceof AxiosError){
+                return toast.show(
+                    err?.response?.data?.error?.message?
+                    err?.response?.data?.error?.message
+                    :err.status == 401 ? "Unauthorized" : "Internal Server Error please try again",
+                    {type:"danger"})
+            }
+            toast.show("Unexpected error",{type:"danger"})
+        }
 
     })
     return {

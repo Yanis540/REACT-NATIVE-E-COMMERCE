@@ -6,22 +6,21 @@ import HomeProducts from './components/HomeProducts';
 import { CategoryCard , ErrorComponent, Loader } from '../../components';
 
 function Home() {
-    const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts,getAsyncProducts} = useProducts(); 
+    const {data:dataProducts,isLoading:isLoadingProducts,error:errorProducts,getProducts} = useProducts(); 
     const {products} = dataProducts
     const {data:dataCategories,isLoading:isLoadingCategories,error:errorCategories} = useCategories();
     const {categories} = dataCategories;  
-    const error = errorProducts|| errorCategories ; 
-    const loading = isLoadingCategories || isLoadingProducts
+    const error = errorProducts?? errorCategories ; 
+    const loading = isLoadingCategories?? isLoadingProducts
     const [refreshing, setRefreshing] = React.useState(false);
 
     const onRefresh = React.useCallback(async() => {
         setRefreshing(true);
-        await getAsyncProducts({})
+        getProducts({})
         setRefreshing(false)
     }, []);
-                    
     if(error)return (
-    <RefreshControl refreshing={refreshing} onRefresh={onRefresh}>
+    <RefreshControl className='flex-1 bg-white border' refreshing={refreshing} onRefresh={onRefresh}>
         <ErrorComponent data={dataProducts?.error? dataProducts:dataCategories} /> 
     </RefreshControl>
     )
@@ -30,7 +29,7 @@ function Home() {
     )
     return (
         <ScrollView
-            className='flex-1 flex pl-5 overflow-y-scroll bg-white  '
+            className='flex-1 flex pl-5 overflow-y-scroll bg-white'
             refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
               }

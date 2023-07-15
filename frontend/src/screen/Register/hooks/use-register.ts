@@ -38,9 +38,6 @@ const useRegister = ()=>{
             toast.show(message,{type:"success",animationType:"slide-in",duration:4000,placement:"top"}) 
             navigation.navigate("LoginScreen")
         }, 
-        onError:(err)=>{
-            console.log(err)
-        }
         
     }); 
 
