@@ -9,6 +9,7 @@ interface Request extends DefaultRequest {
 
 
 export const get_orders = asyncHandler(async(req:Request,res:Response)=>{
+    console.log("HERE")
     const orders= await db.order.findMany({
         where:{
             user:{
@@ -30,7 +31,7 @@ export const get_orders = asyncHandler(async(req:Request,res:Response)=>{
     })
 
 
-    res.status(200).json({message:"Added to favorite",user:{orders}})
+    res.status(200).json({orders})
 
  
 })
