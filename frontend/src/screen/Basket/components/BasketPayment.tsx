@@ -20,15 +20,22 @@ function BasketPayment({}:BasketPaymentProps) {
     const {basket} = useBasket(); 
     const {user} = useAuth(); 
     const {navigation } = useBasketNavigation(); 
+
     const {pay,isPaying} = useStripePayment({basket});
+
+    // Collapsing payment related stuff 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(true);
     const toggleCollapsed = ()=>setIsCollapsed(!isCollapsed)
+
     const isFreeShipping = false ;
     const shippingPrice = isFreeShipping?0 : 5
     const isCouponAvailable = true ;
     const couponReduction = !isCouponAvailable ?0: 0.05;
+    
     const total = useMemo(()=> calculateTotal(basket),[basket]);
+
     const actualTotal = (!isCouponAvailable? total:total*(1-couponReduction))+ (shippingPrice)
+
     const handlePress= ()=>{
         if(user)
             if(!isPaying)

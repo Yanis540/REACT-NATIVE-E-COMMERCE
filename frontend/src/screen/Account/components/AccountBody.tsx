@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 import { Text, View , Modal, FlatList , TouchableOpacity } from 'react-native'
 import { MaterialIcons , FontAwesome  , Fontisto , Ionicons  } from '@expo/vector-icons';
-import AccountBodyModal from './AccountBodyModal';
-import AccountFavoriteProducts from './AccountFavoriteProducts';
-import AccountSettings from './AccountSettings';
-import AccountOrders from './AccountOrders';
+import { AccountStackList } from '@/routes/Stacks/Account/AccountStack';
+import { useAccountNavigation } from '../../../routes';
 interface AccountBodyProps {
 
 };
-type AccountOption = "orders"| "favorites"|"settings"|undefined; 
-const account_options:{name:AccountOption,Icon?: any   }[]= [
-    {name:"settings",Icon:()=><MaterialIcons name="settings" size={24} color={"rgb(52, 211,153)"} />},
-    {name:"orders",Icon:()=><FontAwesome name="shopping-basket" size={24} color={"rgb(52, 211,153)"} />},
-    {name:"favorites",Icon:()=><Fontisto name="heart"  size={24} color={"rgb(52, 211,153)"} />}
+type AccountOption = "orders"| "favorites"|"settings"; 
+const account_options:{name:AccountOption,Icon?: any ,screen: keyof AccountStackList}[]= [
+    {name:"settings",screen:"SettingsScreen",Icon:()=><MaterialIcons name="settings" size={24} color={"rgb(52, 211,153)"} />},
+    {name:"orders",screen:"OrdersScreen",Icon:()=><FontAwesome name="shopping-basket" size={24} color={"rgb(52, 211,153)"} />},
+    {name:"favorites",screen:"FavoritesScreen",Icon:()=><Fontisto name="heart"  size={24} color={"rgb(52, 211,153)"} />}
 ]
 function AccountBody({}:AccountBodyProps) {
 
-    const [accountOption, setAccountOption] = useState<AccountOption>(undefined) ; 
-
+    const {navigation} = useAccountNavigation();
     return (
         <View className="flex-1 flex px-4 py-2 ">
            {/*  */}
@@ -30,32 +27,13 @@ function AccountBody({}:AccountBodyProps) {
                         <item.Icon /> 
                         <Text className="ml-[10px] capitalize text-zinc-800">{item.name}</Text>
                         <View className='flex-1  flex flex-row items-center justify-end py-1 '>
-                            <TouchableOpacity onPress={()=>setAccountOption(item.name)}>
+                            <TouchableOpacity onPress={()=>navigation.navigate((item.screen) as any )}>
                                 <Ionicons name="arrow-forward-sharp" size={24} color="rgb(39 39 42)" />
                             </TouchableOpacity>
                         </View>
                     </View>
                 )}
            /> 
-           <AccountBodyModal onClose={()=>{setAccountOption(undefined)}} option={accountOption} visible={!!accountOption} >
-            <View className="flex-1">
-                {
-                    (()=>{
-                        switch(accountOption){
-                            case "favorites": 
-                                return <AccountFavoriteProducts /> 
-                            case "settings":
-                                return <AccountSettings /> 
-                            case "orders":
-                                return <AccountOrders /> 
-                            default : 
-                                return null ; 
-                        }
-                    })
-                    ()
-                }
-            </View>
-           </AccountBodyModal>
            
         </View>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View  , TextInput , Text,TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { View  , TextInput , Text,TouchableOpacity, ScrollView, FlatList , ActivityIndicator } from 'react-native'
 import {toFormikValidationSchema} from "zod-formik-adapter"
 import { loginSchema , LoginSchema } from '../types';
 import {Formik} from "formik";
@@ -54,7 +54,7 @@ function LoginForm({onSubmit }:LoginFormProps) {
             {/* Button */}
             <TouchableOpacity   onPress={handleSubmit as ()=>void}>
               <View className="flex flex-col items-center w-full bg-emerald-400  mb-4 pb-3 px-2 rounded-lg ">
-                <Text className="text-white font-bold text-xl ">Log In</Text>
+                <Text className="text-white font-bold text-xl ">{!isSubmitting?"Log In":<ActivityIndicator color="white" />}</Text>
               </View>
               {/* register */}
               <View className='flex flex-row items-center justify-center gap-2 text-sm px-2 mb-2 '>

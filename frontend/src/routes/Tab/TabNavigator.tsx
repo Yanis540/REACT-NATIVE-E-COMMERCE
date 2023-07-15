@@ -6,7 +6,7 @@ import {Dimensions} from 'react-native';
 import { HomeStack , ShopStack , AccountStack } from '../Stacks';
 import { HomeStackList } from '../Stacks/Home/HomeStack';
 import { ShopStackList } from '../Stacks/Shop/ShopStack';
-import { AccountStackList } from '../Stacks/AccountStack';
+import { AccountStackList } from '../Stacks/Account/AccountStack';
 
 
 export type NavigatorTabList ={

@@ -1,14 +1,14 @@
-import { ErrorComponent, Loader, Products } from '../../../components';
+import React from 'react';
+import { ErrorComponent, Loader, Products } from '../../components';
 import { useCallback, useState } from 'react';
 import { Text, View , TouchableOpacity} from 'react-native'
 import { useFavoriteProducts } from './hooks/use-favorite-products';
 import { Feather } from '@expo/vector-icons';
-
-interface AccountFavoriteProductsProps {
+interface FavoritesProps {
 
 };
 
-function AccountFavoriteProducts({}:AccountFavoriteProductsProps) {
+function Favorites({}:FavoritesProps) {
     const [refreshing,setRefreshing] = useState<boolean>(false); 
     const {
         data,error,isLoading,
@@ -37,7 +37,7 @@ function AccountFavoriteProducts({}:AccountFavoriteProductsProps) {
         </View>
     )
     return (
-        <View className="flex-1">
+        <View className="flex-1 p-4 bg-white">
             <Products 
                 products={favorite_products} refreshing={refreshing} 
                 onRefresh={onRefresh}
@@ -46,4 +46,4 @@ function AccountFavoriteProducts({}:AccountFavoriteProductsProps) {
     )
 };
 
-export default AccountFavoriteProducts;
+export default Favorites;

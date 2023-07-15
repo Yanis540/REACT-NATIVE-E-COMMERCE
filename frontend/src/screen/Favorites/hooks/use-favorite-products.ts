@@ -2,9 +2,9 @@
 
 import { UseMutateFunction, UseMutateAsyncFunction, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
-import { SERVER_URL } from "../../../../env"
-import { Product } from "../../../../types"
-import { onError } from "../../../../utils"
+import { SERVER_URL } from "../../../env"
+import { Product } from "../../../types"
+import { onError } from "../../../utils"
 import { useEffect } from "react"
 
 interface DataResponse {

@@ -3,7 +3,7 @@ import { useNavigation, useRoute , RouteProp, CompositeNavigationProp} from '@re
 import type { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { HomeStackList } from './Stacks/Home/HomeStack';
 import { ShopStackList } from './Stacks/Shop/ShopStack';
-import { AccountStackList } from './Stacks/AccountStack';
+import { AccountStackList } from './Stacks/Account/AccountStack';
 import { NavigatorTabList } from './Tab/TabNavigator';
 import { AuthStackList } from './Stacks/AuthStack';
 import { NavigatorList } from './Navigator';
@@ -30,7 +30,7 @@ export const useGlobaNavigation =()=>{
 
 
 
-//!##################### Home #####################
+//!##################### Home Stack #####################
     
 type HomeScreenProps =
     CompositeNavigationProp<
@@ -46,7 +46,7 @@ export const useHomeNavigation =()=>{
     return {navigation,route}
 }
 
-//!##################### Shop #####################
+//!##################### Shop Stack #####################
 
     
 type ShopScreenProps =
@@ -63,7 +63,7 @@ export const useShopNavigation =()=>{
     return {navigation,route}
 }
 
-//!##################### Account #####################
+//!##################### Account Stack  #####################
 
 type AccountScreenProps =
     CompositeNavigationProp<
@@ -75,7 +75,7 @@ type AccountScreenProps =
     >
 export const useAccountNavigation =()=>{
     const navigation =  useNavigation<AccountScreenProps>(); 
-    const route = useRoute<RouteProp<AccountStackList,"AccountScreen">>()
+    const route = useRoute<RouteProp<AccountStackList,keyof AccountStackList>>()
     return {navigation,route}
 }
 
