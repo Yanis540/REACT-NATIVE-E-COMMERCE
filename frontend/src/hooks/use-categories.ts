@@ -1,10 +1,9 @@
 
-import { UseMutateFunction, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { UseMutateAsyncFunction, UseMutateFunction, useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axios from "axios"
 import { SERVER_URL } from "../env"
 import { Category } from "../types"
 import { useEffect } from "react"
-import { onError } from "../utils"
 
 
 interface  useCategoriesType {
@@ -18,7 +17,6 @@ interface  useCategoriesType {
 }
 
 const useCategories = ()=>{
-    const queryClient = useQueryClient();
     const {data,isLoading,error,mutate}:useCategoriesType  = useMutation({
         mutationKey:["categories"], 
         mutationFn:async()=>{
@@ -26,7 +24,6 @@ const useCategories = ()=>{
             const data = await response.data
             return data;
         },
-        onError:(err)=>onError(err,["categories"],queryClient)
     }) 
     useEffect(()=>{
         mutate()

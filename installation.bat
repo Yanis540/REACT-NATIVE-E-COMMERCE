@@ -51,4 +51,5 @@ npm i react-native-toast-notifications
 npx expo install expo-linear-gradient
 npm i react-native-modal
 npm install @stripe/stripe-react-native 
+npm i @react-native-google-signin/google-signin
 : folow this https://www.nativewind.dev/quick-starts/expo

@@ -6,10 +6,10 @@ import { AuthProviderButton } from '../../../components';
 interface AuthProvidersProps {
 
 };
-const providers:AuthProvider[]= ["github","google"]
+const providers:AuthProvider[]= ["google"]
 function AuthProviders({}:AuthProvidersProps) {
-    const handleProviderLogin = (provider:AuthProvider)=>{
-        console.log(provider)
+    const handleProviderLogin = async (provider:AuthProvider)=>{
+        console.log(provider); 
     }
     return (
     <View className='flex flex-row items-center justify-center w-full '>

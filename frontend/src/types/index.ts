@@ -1,5 +1,9 @@
+import { AuthConfiguration, AuthorizeResult } from "react-native-app-auth"
 
-export type AuthProvider= "github"|"google"
+export type ProviderConfig = {
+    // access_profile_url : string
+}&AuthConfiguration
+export type AuthProvider= "google"
 export type BasketProduct ={
     ordered_quantity: number
     color: ColorVariant 
@@ -16,7 +20,12 @@ export type User = {
     created_at : string 
     favorite_products : Product []
     orders : Order []  
+    tokens ?: AuthCredentials
 
+}
+export type ProviderUser =object& {
+    
+    provider_state:AuthorizeResult
 }
 export type AuthCredentials = {
     access: {
