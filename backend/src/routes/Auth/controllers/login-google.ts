@@ -2,45 +2,63 @@ import asyncHandler from "express-async-handler";
 import {ZodError, z} from "zod";
 import { db } from "../../../libs/db";
 import {Response} from "express"
-import bcrypt from "bcrypt"
-import { generateAccessToken, generateAuthToken } from "../../../tokens";
+import {  generateAuthToken } from "../../../tokens";
 import { PrismaClientKnownRequestError, PrismaClientUnknownRequestError } from "@prisma/client/runtime/data-proxy";
 import { DefaultRequest } from "../../../types";
 
-const loginSchema = z.object({
-    email :z.string().email(), 
-    password : z.string()
+const loginBody = z.object({
+    userInfo: z.object({
+        user:z.object({
+            id:z.string(), 
+            email:z.string(), 
+            name:z.string().nullable().optional(), 
+            photo:z.string().nullable().optional(), 
+            familyName:z.string().nullable().optional(), 
+            givenName:z.string().nullable().optional(), 
+        }) , 
+        scopes : z.array(z.string()).optional(), 
+        idToken: z.string().nullable().optional(), 
+        serverAuthCode: z.string().nullable().optional()
+        
+    })
 })
 
-type LoginSchema = z.infer<typeof loginSchema>
+type LoginBody = z.infer<typeof loginBody>
 interface Request extends DefaultRequest {
-    body:LoginSchema
+    body:LoginBody
 }
 
 
-const login_controller = asyncHandler(async(req:Request,res:Response)=>{
+const login_google_controller = asyncHandler(async(req:Request,res:Response)=>{
     try{
-        const {email,password} = loginSchema.parse(req.body); 
+        const {userInfo} = loginBody.parse(req.body); 
         const existingUser = await db.user.findFirst({
             where:{
-                email
+                email : userInfo.user.email
             }, 
             include:{
                 favorite_products:true, 
                 orders:true
             }
         }); 
+        let createdUser ; 
         if(!existingUser) {
-            res.status(404)
-            throw new Error(`No user with email ${email}`, {cause:"EMAIL_NOT_FOUND"});
+            createdUser =  await db.user.create({
+                data:{
+                    email: userInfo.user.email,
+                    id: userInfo.user.id,
+                    image: userInfo.user.id,
+                    name: userInfo.user.name??`${userInfo.user.familyName??""} ${userInfo.user.givenName??""}`
+                }, 
+                include:{
+                    favorite_products:true, 
+                    orders:true
+                }
+            })
         }
-        const passwordMatch = await bcrypt.compare(password,existingUser.hashedPassword!);
-        if(!passwordMatch){
-            res.status(401)
-            throw new Error("Invalid password",{cause:"INVALID_PASSWORD"})
-        }
+       
         // create and send tokens 
-        const {accessToken,refreshToken,expiresIn} = generateAuthToken(existingUser.id);
+        const {accessToken,refreshToken,expiresIn} = generateAuthToken(existingUser?existingUser.id: createdUser!.id);
         res.status(201).json({
             user : {
                 ...existingUser,
@@ -75,4 +93,4 @@ const login_controller = asyncHandler(async(req:Request,res:Response)=>{
         // const {}
 })
 
-export{ login_controller}
+export{ login_google_controller}

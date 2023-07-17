@@ -19,3 +19,18 @@ export type FullProduct = Product &{
 
 export type ProductBasket = z.infer<typeof productBasketSchema>  
 export type Basket = z.infer<typeof basketSchema>
+
+export type GoogleUser = {
+    user: {
+        id: string;
+        name: string | null;
+        email: string;
+        photo: string | null;
+        familyName: string | null;
+        givenName: string | null;
+      };
+    scopes?: string[];
+    idToken: string | null;
+   
+    serverAuthCode: string | null;
+}

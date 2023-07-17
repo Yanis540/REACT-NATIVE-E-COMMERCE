@@ -15,7 +15,7 @@ model User {
   image             String?
   name              String
   email             String?   @unique
-  hashedPassword    String
+  hashedPassword    String?
   address           String?
   created_at        DateTime  @default(now())
   favorite_products Product[]
