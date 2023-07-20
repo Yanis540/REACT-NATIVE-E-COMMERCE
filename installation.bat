@@ -7,7 +7,7 @@ npm install @prisma/client
 npx tsc --init
 npx prisma init
 npm i stripe 
-
+npm install google-auth-library --save
 
 : Front 
 
@@ -51,5 +51,27 @@ npm i react-native-toast-notifications
 npx expo install expo-linear-gradient
 npm i react-native-modal
 npm install @stripe/stripe-react-native 
-npm i @react-native-google-signin/google-signin
+npx expo install @react-native-google-signin/google-signin
+
 : folow this https://www.nativewind.dev/quick-starts/expo
+: installing build 
+npm install -g eas-cli
+
+eas login 
+eas build:configure
+eas build 
+eas credentials @REM will allow you to get the SHA1 fingerprint
+: > go to firebase create new application and add an android application 
+: put the name as the name you choose here and select 
+: with eas credentials you should get he SHA1 key that will be used in firebase
+: put all of them in a single file and then go to the application > download the google-services.json 
+: go to > authentication and sign in method and choose google  
+
+@REM ? Android
+cd frontend 
+: RUN THIS COMMAND : 
+keytool -list -v -keystore android/app/debug.keystore -alias androiddebugkey -storepass android -keypass android
+: you should get the SHA1 key for your project tthat we will add to firebase 
+@REM todo COPY TWO THINGS : PACKAGE NAME + SHA1 KEY 
+
+: than folow these things : https://github.com/react-native-google-signin/google-signin/blob/master/docs/android-guide.md

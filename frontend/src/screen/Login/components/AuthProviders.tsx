@@ -2,6 +2,7 @@ import { AuthProvider } from '@/types';
 import React from 'react';
 import { View } from 'react-native'
 import { AuthProviderButton } from '../../../components';
+// import GoogleSignButton from '../../../components/Button/GoogleSignButton';
 
 interface AuthProvidersProps {
 
@@ -18,6 +19,7 @@ function AuthProviders({}:AuthProvidersProps) {
                 <AuthProviderButton key={provider} onPress={()=>{handleProviderLogin(provider)}} name={provider} /> 
             ))
         }
+        {/* <GoogleSignButton />  */}
     </View>
     );
 };

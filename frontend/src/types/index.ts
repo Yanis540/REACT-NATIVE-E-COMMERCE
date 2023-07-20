@@ -1,8 +1,5 @@
-import { AuthConfiguration, AuthorizeResult } from "react-native-app-auth"
 
-export type ProviderConfig = {
-    // access_profile_url : string
-}&AuthConfiguration
+
 export type AuthProvider= "google"
 export type BasketProduct ={
     ordered_quantity: number
@@ -11,6 +8,17 @@ export type BasketProduct ={
     
 }&Product
 
+export type GoogleUser = {
+    id: string;
+    name: string | null;
+    email: string;
+    photo: string | null;
+    familyName: string | null;
+    givenName: string | null;
+    scopes?: string[];
+    idToken: string | null;
+    serverAuthCode: string | null;
+}
 export type User = {
     id : string 
     image? : string 
@@ -22,10 +30,7 @@ export type User = {
     orders : Order []  
     tokens ?: AuthCredentials
 
-}
-export type ProviderUser =object& {
     
-    provider_state:AuthorizeResult
 }
 export type AuthCredentials = {
     access: {
