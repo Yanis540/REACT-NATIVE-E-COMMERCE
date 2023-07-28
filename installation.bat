@@ -30,8 +30,10 @@ npm install @react-navigation/stack @react-navigation/drawer @react-navigation/b
 
 npx expo install react-native-gesture-handler react-native-reanimated
 
-npm i nativewind
+npm i nativewind 
+npm i tailwindcss @REM for my case use the version 3.3.2
 npx tailwindcss init 
+: folow this https://www.nativewind.dev/quick-starts/expo
 npm install --save-dev tsc-alias
 npm i @react-navigation/native-stack
 npm install zustand
@@ -53,7 +55,6 @@ npm i react-native-modal
 npm install @stripe/stripe-react-native 
 npx expo install @react-native-google-signin/google-signin
 
-: folow this https://www.nativewind.dev/quick-starts/expo
 : installing build 
 npm install -g eas-cli
 
